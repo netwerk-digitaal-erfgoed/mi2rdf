@@ -17,9 +17,9 @@ if ($_FILES["file"]["size"]>0) {
 				
 	if (($ext == ".txt") || ($ext == ".zip")) {
 		if ($uploadedfile!="") {
-			if ($ext == ".zip") {
+				if ($ext == ".zip") {
 				$tmpdir=UPLOAD_DIR.uniqid();
-				
+				mkdir($tmpdir);
 				$list=unzip($_FILES['file']['tmp_name'],$tmpdir);
 				for($i = 0; $i < sizeof($list); $i++) {
 					$ext = strtolower(substr($list[$i],-4));

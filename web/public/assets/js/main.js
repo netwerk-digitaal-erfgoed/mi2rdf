@@ -89,7 +89,7 @@ function updateDatasetlist() {
 				listDiv+=jsonResponse[i].org_name;
 				listDiv+=' &raquo; <span class="'+jsonResponse[i].state+'">'
 				if (jsonResponse[i].state=='converted') {
-					listDiv+='<a href="/download.php?guid='+jsonResponse[i].guid+'">';
+					listDiv+='<a href="download.php?guid='+jsonResponse[i].guid+'">';
 					listDiv+=jsonResponse[i].state;
 					listDiv+='</a>';
 				} else {
