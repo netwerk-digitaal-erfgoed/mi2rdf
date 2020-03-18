@@ -154,7 +154,7 @@ function updateDatasetlist() {
 			var bUnconverted=0;
 			for(var i = 0; i < jsonResponse.length; i++) {
 				listDiv+='<li title="Originele bestandsnaam: '+jsonResponse[i].org_name+' | Aangeleverd: '+jsonResponse[i].created+' | Omgezet: '+jsonResponse[i].converted+'">';
-				listDiv+=jsonResponse[i].org_name;
+				listDiv+=jsonResponse[i].id+' - '+jsonResponse[i].org_name;
 				listDiv+=' &raquo; <span class="'+jsonResponse[i].state+'">'
 				if (jsonResponse[i].state=='converted') {
 					listDiv+='<a href="download.php?guid='+jsonResponse[i].guid+'">';
