@@ -1,0 +1,37 @@
+{
+   "rabbit_version":"3.8.3",
+   "rabbitmq_version":"3.8.3",
+   "users":[
+      {
+         "name":"mi2rdf",
+         "password_hash":"GhNhJooe+YUwPZD1Irr9TDSI2ECIfkoaizl6n+2eKjegHz27",
+         "hashing_algorithm":"rabbit_password_hashing_sha256",
+         "tags":"administrator"
+      }
+   ],
+   "vhosts":[
+      {
+         "name":"/"
+      }
+   ],
+   "permissions":[
+      {
+         "user":"mi2rdf",
+         "vhost":"/",
+         "configure":".*",
+         "write":".*",
+         "read":".*"
+      }
+   ],
+   "queues":[
+      {
+         "name":"mi2rdf",
+         "vhost":"/",
+         "durable":true,
+         "auto_delete":false,
+         "arguments":{
+            "x-queue-type":"classic"
+         }
+      }
+   ]
+}

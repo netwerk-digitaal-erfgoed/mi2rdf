@@ -1,0 +1,1 @@
+Docker met Nginx, PHP-FPM, Composer, MySQL, RabbitMQ en [MWDS-to-JSON](https://github.com/netwerk-digitaal-erfgoed/MDWS-to-JSON)/[MDWS-JSON-to-Turtle](https://github.com/netwerk-digitaal-erfgoed/MDWS-JSON-to-Turtle).
