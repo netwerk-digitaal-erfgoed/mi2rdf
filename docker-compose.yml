@@ -23,6 +23,8 @@ services:
         volumes:
             - "./etc/php/php.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini"
             - "./web:/var/www/html"
+        networks:
+            - traefik
 
     queue:
         image:  rabbitmq:management-alpine
@@ -36,6 +38,8 @@ services:
             - "5672:5672"
         environment:
             - RABBITMQ_ERLANG_COOKIE='en_dee_eee'
+        networks:
+            - traefik
 
     consumer:
         build: consumer
@@ -44,6 +48,8 @@ services:
             - "./web:/var/www/html"
         depends_on:
             - "queue"
+        networks:
+            - traefik
             
     composer:
         image: "composer"
@@ -68,6 +74,8 @@ services:
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         ports:
             - "3306:3306"
+        networks:
+            - traefik
  
 networks:
     traefik:

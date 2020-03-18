@@ -2,7 +2,6 @@
 .*.swp
 
 # Application
-web/composer.json
 web/composer.lock
 web/vendor/
 web/filestore/
