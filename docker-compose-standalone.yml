@@ -19,12 +19,6 @@ services:
         volumes:
             - "./etc/php/php.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini"
             - "./web:/var/www/html"
-        labels:
-            - "traefik.docker.network=traefik"
-            - "traefik.frontend.rule=Host:demo.netwerkdigitaalerfgoed.nl;PathPrefix:/mi2rdf;PathPrefixStrip:/mi2rdf"
-            - "traefik.port=80"
-        networks:
-            - traefik
 
     queue:
         image:  rabbitmq:management-alpine
@@ -71,6 +65,3 @@ services:
         ports:
             - "3306:3306"
  
- networks:
-    traefik:
-        external: true
