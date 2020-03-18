@@ -3,7 +3,3 @@
 
 # Application
 web/composer.lock
-web/vendor/
-web/filestore/
-data/
-queue/data/
