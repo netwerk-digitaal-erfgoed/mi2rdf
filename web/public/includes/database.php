@@ -4,7 +4,7 @@ function fInsertDataset($guid,$org_name,$state="uploaded") {
 	error_log("DEBUG: fInsertDataset($guid,$org_name,$state)");
 	$mysqli = new mysqli(DB_HOST, DB_PASS, DB_PASS, DB_DATA);
 	if ($mysqli->connect_error) {
-	   die("Connection failed: " . $mysqli->connect_error);
+		die("ERROR: Connection failed: " . $mysqli->connect_error);
 	} 
 
 	$sql = "INSERT INTO datasets(guid,org_name,state) VALUES (?,?,?)";
@@ -13,9 +13,30 @@ function fInsertDataset($guid,$org_name,$state="uploaded") {
 	$stmt->execute();
 
 	if (mysqli_query($mysqli, $sql)) {
-	   echo "New record created successfully";
+		echo "INFO: New record created successfully";
 	} else {
-	   echo "Error: " . $sql . "" . mysqli_error($mysqli);
+		echo "ERROR: " . $sql . "" . mysqli_error($mysqli);
+	}
+	$mysqli->close();
+
+}
+
+function fDeleteDataset($guid) {
+	error_log("DEBUG: fDeleteDataset($guid)");
+	$mysqli = new mysqli(DB_HOST, DB_PASS, DB_PASS, DB_DATA);
+	if ($mysqli->connect_error) {
+		die("ERROR: Connection failed: " . $mysqli->connect_error);
+	} 
+
+	$sql = "DELETE FROM datasets WHERE guid=?";
+	$stmt = $mysqli->prepare($sql);
+	$stmt->bind_param("s",$guid);
+	$stmt->execute();
+
+	if (mysqli_query($mysqli, $sql)) {
+		echo "INFO: Record deleted successfully";
+	} else {
+		echo "ERROR: " . $sql . "" . mysqli_error($mysqli);
 	}
 	$mysqli->close();
 
@@ -24,7 +45,7 @@ function fInsertDataset($guid,$org_name,$state="uploaded") {
 function arrGetDatasets($last=5) {
 	$mysqli = new mysqli(DB_HOST, DB_PASS, DB_PASS, DB_DATA);
 	if ($mysqli->connect_errno) {
-	   die("Connection failed: " . $mysqli->connect_error);
+		die("ERROR: Connection failed: " . $mysqli->connect_error);
 	} 
 	
 	$sql = "SELECT * FROM datasets ORDER BY id DESC LIMIT 0,".$last;

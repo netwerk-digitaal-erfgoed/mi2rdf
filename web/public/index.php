@@ -40,13 +40,12 @@
                 <table width="100%" border=0>
                     <tr>
                         <td id="drop-area" rowspan="3" width="25%">
-                             <p>Sleep hier &eacute;&eacute;n of meerdere MDWS Internet (.txt of .zip) bestanden heen of klik op onderstaande knop om bestanden te selecteren.<br>Bestanden worden direct vertrippeld.</p>
-
+                            <p>Sleep hier &eacute;&eacute;n of meerdere MDWS Internet bestanden heen of klik op onderstaande knop om bestanden te selecteren.</p>
                             <form class="my-form">
-                                <input type="file" multiple id="fileElem" onchange="handleFiles(this.files)">
-                                <label title="Maximale grootte per bestand is 100MB." class="btn btn-block btn-label" for="fileElem">Selecteer bestand</label>
+                                <input type="file" multiple id="fileElem" accept=".txt,.zip" onchange="handleFiles(this.files)">
+                                <label title="Maximale grootte per bestand is 100MB. De .txt bestanden kunnen ook gecomprimeerd en/of gebundeld worden in een .zip bestand." class="btn btn-block btn-label" for="fileElem">Selecteer bestand(en)</label>
                             </form>
-
+							<br>Het vertrippelen start direct.
                         </td>
                         <td width="30%"><br></td>
                         <td id="datasetlist" width="45%" rowspan="3"><br></td>

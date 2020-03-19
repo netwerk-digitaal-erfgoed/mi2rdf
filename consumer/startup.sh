@@ -1,5 +1,7 @@
 #!/bin/bash
 
+chown www-data:www-data /filestore
+
 while :
 do
   echo "INFO: Trying to start amqp-consume (is queue/rabbitmq available?)"

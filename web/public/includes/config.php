@@ -1,6 +1,6 @@
 <?php
 
-define("UPLOAD_DIR","/var/www/html/filestore/");
+define("UPLOAD_DIR","/filestore/");
 
 define("DB_HOST","mi2rdf-database");
 define("DB_USER","mi2rdf");

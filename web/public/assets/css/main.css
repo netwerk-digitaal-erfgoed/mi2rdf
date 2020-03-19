@@ -1,152 +1,150 @@
-/*
-@font-face {
-  font-family: 'Roboto2';
-  src: url('/assets/fonts/roboto2-regular.eot');
-  src: url('/assets/fonts/roboto2-regular.eot?#iefix') format('embedded-opentype'),
-       url('/assets/fonts/roboto2-regular.woff2') format('woff2'),
-       url('/assets/fonts/roboto2-regular.woff') format('woff'),
-       url('/assets/fonts/roboto2-regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto2';
-  src: url('/assets/fonts/roboto2-bold.eot');
-  src: url('/assets/fonts/roboto2-bold.eot?#iefix') format('embedded-opentype'),
-       url('/assets/fonts/roboto2-bold.woff2') format('woff2'),
-       url('/assets/fonts/roboto2-bold.woff') format('woff'),
-       url('/assets/fonts/roboto2-bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-*/
 body {
-  font-family: "Roboto2", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  overflow:hidden;
+     font-family: "Roboto2", "Helvetica Neue", Helvetica, Arial, sans-serif;
+     overflow:hidden;
 }
-
-.sink {
-  padding: 10px;
-  margin: 10px;
-  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
-  background-color: #fff;
+ .sink {
+     padding: 10px;
+     margin: 10px;
+     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+     background-color: #fff;
 }
-
-.navbar-content {
-  display: flex;
+ .navbar-content {
+     display: flex;
 }
-
-.navbar-title {
-  flex-grow: 1;
-  color: #1690c6;
-  display: flex;
-  align-items: center;
+ .navbar-title {
+     flex-grow: 1;
+     color: #1690c6;
+     display: flex;
+     align-items: center;
 }
-
-body.withNavbar {
-  min-height: 75rem;
-  padding-top: 4.5rem;
+ body.withNavbar {
+     min-height: 75rem;
+     padding-top: 4.5rem;
 }
-
-body.withSink {
-  background-color: #ebedef;
+ body.withSink {
+     background-color: #ebedef;
 }
-
-.withNavbar .navbar {
-  padding: 0.3rem 1rem;
-  background-color: hsla(0,0%,100%,.87);
-  box-shadow: 0 0 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+ .withNavbar .navbar {
+     padding: 0.3rem 1rem;
+     background-color: hsla(0,0%,100%,.87);
+     box-shadow: 0 0 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
 }
-
-.navbar-icon img {
-  height: 2.5rem;
+ .navbar-icon img {
+     height: 2.5rem;
 }
-
-#midelbar {
-	background-color:#fdc921;
-background: -moz-linear-gradient(left, #fdc921 0%, #fefcea 50%, #fdc921 99%); /* FF3.6-15 */
-background: -webkit-linear-gradient(left, #fdc921 0%,#fefcea 50%,#fdc921 99%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to right, #fdc921 0%,#fefcea 50%,#fdc921 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-
+ #midelbar {
+     background-color:#fdc921;
+     background: -moz-linear-gradient(left, #fdc921 0%, #fefcea 50%, #fdc921 99%);
+    /* FF3.6-15 */
+     background: -webkit-linear-gradient(left, #fdc921 0%,#fefcea 50%,#fdc921 99%);
+    /* Chrome10-25,Safari5.1-6 */
+     background: linear-gradient(to right, #fdc921 0%,#fefcea 50%,#fdc921 99%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
-.btn-label { 
-	background-color:#007bff;
-	color:white 
+ .btn-label {
+     background-color:#007bff;
+     color:white 
 }
-
-#fileElem {
-	display: none;
+ #fileElem {
+     display: none;
 }
-
-#drop-area {
-	height:240px;
-	background-color:#fdc921;
-	border-left:3px solid #007bff;
-	color:#333;
-	padding:20px;
-	text-align:center;
-	border-top-right-radius:12px;
-	border-bottom-right-radius:12px;
+ #drop-area {
+     height:240px;
+     background-color:#fdc921;
+     border-left:3px solid #007bff;
+     color:#333;
+     padding:20px;
+     text-align:center;
+     border-top-right-radius:12px;
+     border-bottom-right-radius:12px;
 }
-#drop-area.highlight {
-	border-left:2px solid #fdc921;
-	background-color:#007bff;
-	color:white;
-	
+ #drop-area.highlight {
+     border-left:2px solid #fdc921;
+     background-color:#007bff;
+     color:white;
 }
-
-#datasetlist {
-	background-color:#fdc921;
-	border-right:3px solid #007bff;
-	border-top-left-radius:12px;
-	border-bottom-left-radius:12px;
+ #datasetlist {
+     background-color:#fdc921;
+     border-right:3px solid #007bff;
+     border-top-left-radius:12px;
+     border-bottom-left-radius:12px;
+     transition: box-shadow 0.6s linear;
 }
-
-.msgBoxDivStyle {
-	 background: rgba(127, 127, 127, 0.6);
-	 height: 100%;
-	 position: absolute;
-	 width: 100%;z-index: 9999;
+ .running {
+     box-shadow: 5px 0px 0px 0px #007bff;
 }
-.msgBoxTitleStyle { 
-	background-color: #fdc921;color: black;text-align:center;font-weight: bold;left: 0px;padding: 4px;top: 0px;
+ .delbtn {
+     float:right;
+     width:18px;
+     display:table-cell;
+     background-color:white;
+     border-radius:20px;
+     text-align:center;
+     margin:8px 8px 0 0;
+     font-size:0.8em;
+     opacity:0.8;
 }
-.msgBoxContentsStyle {
-	background: rgba(255, 255, 255, 1);background-color: white;
-	box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
-	left: 30%;position: absolute;resize: vertical;text-align: center;top: 15%;width: 40%;
+ .msgBoxDivStyle {
+     background: rgba(127, 127, 127, 0.6);
+     height: 100%;
+     position: absolute;
+     width: 100%;
+    z-index: 9999;
 }
-.msgBoxTextStyle { 
-	overflow: auto;padding: 20px;text-align: center; 
+ .msgBoxTitleStyle {
+     background-color: #fdc921;
+    color: black;
+    text-align:center;
+    font-weight: bold;
+    left: 0px;
+    padding: 4px;
+    top: 0px;
 }
-.msgBoxButtonStyle { 
-	margin: 20px; background-color:#007bff;color:white
+ .msgBoxContentsStyle {
+     background: rgba(255, 255, 255, 1);
+    background-color: white;
+     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+     left: 30%;
+    position: absolute;
+    resize: vertical;
+    text-align: center;
+    top: 15%;
+    width: 40%;
 }
-
-
-ul.dlist {
-	list-style: none; /* Remove default bullets */
-	margin:0;
-	color:#333;
-	height:245px;
-	overflow-y:auto;
+ .msgBoxTextStyle {
+     overflow: auto;
+    padding: 20px;
+    text-align: center;
 }
-
-
-ul.dlist li::before {
-  content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
-  color: #007bff; /* Change the color */
-  font-weight: bold; /* If you want it to be bold */
-  display: inline-block; /* Needed to add space between the bullet and the text */
-  width: 1em; /* Also needed for space (tweak if needed) */
-  margin:5px 0 5px -1em;
+ .msgBoxButtonStyle {
+     margin: 20px;
+     background-color:#007bff;
+    color:white 
 }
-
-.converting {
-	font-weight:bold;
+ ul.dlist {
+     list-style: none;
+    /* Remove default bullets */
+     margin:0;
+     color:#333;
+     height:245px;
+     overflow-y:auto;
 }
-
-.converted {
-	color:green;
+ ul.dlist li::before {
+     content: "\2022";
+    /* Add content: \2022 is the CSS Code/unicode for a bullet */
+     color: #007bff;
+    /* Change the color */
+     font-weight: bold;
+    /* If you want it to be bold */
+     display: inline-block;
+    /* Needed to add space between the bullet and the text */
+     width: 1em;
+    /* Also needed for space (tweak if needed) */
+     margin:5px 0 5px -1em;
+}
+ .converting {
+     font-weight:bold;
+}
+ .converted {
+     color:green;
 }
