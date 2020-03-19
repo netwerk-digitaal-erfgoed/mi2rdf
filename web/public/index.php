@@ -40,11 +40,11 @@
                 <table width="100%" border=0>
                     <tr>
                         <td id="drop-area" rowspan="3" width="25%">
-                            <p>Sleep hier een MDWS Internet bestand (.txt of .zip) heen of klik op onderstaande knop om een bestand te selecteren.<br>Het bestand zal direct vertrippeld worden.</p>
+                             <p>Sleep hier &eacute;&eacute;n of meerdere MDWS Internet (.txt of .zip) bestanden heen of klik op onderstaande knop om bestanden te selecteren.<br>Bestanden worden direct vertrippeld.</p>
 
                             <form class="my-form">
-                                <input type="file" id="fileElem" onchange="handleFiles(this.files)">
-                                <label class="btn btn-block btn-label" for="fileElem">Selecteer bestand</label>
+                                <input type="file" multiple id="fileElem" onchange="handleFiles(this.files)">
+                                <label title="Maximale grootte per bestand is 100MB." class="btn btn-block btn-label" for="fileElem">Selecteer bestand</label>
                             </form>
 
                         </td>

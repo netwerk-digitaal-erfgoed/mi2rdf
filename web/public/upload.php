@@ -17,9 +17,8 @@ if ($_FILES["file"]["size"]>0) {
 				
 	if (($ext == ".txt") || ($ext == ".zip")) {
 		if ($uploadedfile!="") {
-				if ($ext == ".zip") {
-				$tmpdir=UPLOAD_DIR.uniqid();
-				mkdir($tmpdir);
+			if ($ext == ".zip") {
+				$tmpdir=UPLOAD_DIR.uniqid()."/";
 				$list=unzip($_FILES['file']['tmp_name'],$tmpdir);
 				for($i = 0; $i < sizeof($list); $i++) {
 					$ext = strtolower(substr($list[$i],-4));
@@ -65,7 +64,7 @@ function unzip($src_file, $dest_dir) {
 	$list=array();
 	$handler = opendir($dest_dir);
 	while( $file = readdir( $handler ) ) {
-		if ($file!="." && $file!=".." && substr($file,-4)==".txt") {
+		if (substr($file,0,1)!="." && $file!=".." && substr($file,-4)==".txt") {
 			array_push($list,$file);
 		}
 	}
