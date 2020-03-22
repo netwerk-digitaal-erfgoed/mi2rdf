@@ -49,7 +49,7 @@ services:
         container_name: mi2rdf-consumer
         volumes:
             - filestorevolume:/filestore
-         environment:
+        environment:
             - TRIPLY_TOKEN=${TRIPLY_TOKEN}
             - TRIPLY_USER=${TRIPLY_USER}
             - TRIPLY_DATASET=${TRIPLY_DATASET}
