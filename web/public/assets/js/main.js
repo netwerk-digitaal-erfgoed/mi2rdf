@@ -1,7 +1,7 @@
 var myTimer;
 var bUpdateDatasetlist = 1;
 
-let dropArea = document.getElementById('drop-area');
+let dropArea = document.getElementById('drop-area1');
 
 ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
     dropArea.addEventListener(eventName, preventDefaults, false)
@@ -27,11 +27,11 @@ function preventDefaults(e) {
 }
 
 function highlight(e) {
-    dropArea.classList.add('highlight')
+    document.getElementById('drop-area2').classList.add('highlight')
 }
 
 function unhighlight(e) {
-    dropArea.classList.remove('highlight')
+    document.getElementById('drop-area2').classList.remove('highlight')
 }
 
 function handleDrop(e) {

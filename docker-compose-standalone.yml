@@ -26,8 +26,8 @@ services:
             - "./etc/php/php.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini:ro"
             - "./web:/var/www/html:ro"
             - filestorevolume:/filestore
-        environment:
-            - ASSETS_CACHEBUSTER=v1            
+        env_file:
+            - ".env"          
 #       networks:
 #           - traefik
 
@@ -51,12 +51,8 @@ services:
         container_name: mi2rdf-consumer
         volumes:
             - filestorevolume:/filestore
-        environment:
-            - TRIPLY_TOKEN=${TRIPLY_TOKEN}
-            - TRIPLY_USER=${TRIPLY_USER}
-            - TRIPLY_DATASET=${TRIPLY_DATASET}
-            - MYSQL_USER=${MYSQL_USER}
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        env_file:
+            - ".env"
         depends_on:
             - "queue"
             - "database"
@@ -76,11 +72,9 @@ services:
         volumes:
             - "./database/config:/docker-entrypoint-initdb.d/:ro"
             - "datavolume:/var/lib/mysql"
+        env_file:
+            - ".env"            
         environment:
-            - MYSQL_DATABASE=${MYSQL_DATABASE}
-            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-            - MYSQL_USER=${MYSQL_USER}
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
             - MYSQL_INITDB_SKIP_TZINFO=1
         ports:
             - "3306:3306"

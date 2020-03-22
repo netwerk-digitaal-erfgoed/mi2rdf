@@ -48,7 +48,7 @@ body {
  #fileElem {
      display: none;
 }
- #drop-area {
+ #drop-area2 {
      height:240px;
      background-color:#fdc921;
      border-left:3px solid #007bff;
@@ -58,7 +58,7 @@ body {
      border-top-right-radius:12px;
      border-bottom-right-radius:12px;
 }
- #drop-area.highlight {
+ #drop-area2.highlight {
      border-left:2px solid #fdc921;
      background-color:#007bff;
      color:white;
