@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="row" id="drop-area">
+        <div class="row" id="drop-area1">
             <div class="col sink storyBanner">
 
                 <table width="100%" border=0>
