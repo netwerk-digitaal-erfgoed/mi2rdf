@@ -8,8 +8,8 @@
     <link href="./assets/imgs/nde_logo_simplified.png" rel="icon" type="image/png">
     <title>MI2RDF</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="./assets/css/main.css" rel="stylesheet" type="text/css">
-    <link href="./assets/css/baton.css" rel="stylesheet" type="text/css">
+    <link href="./assets/css/main.css?<?= $_SERVER['ASSETS_CACHEBUSTER'] ?>" rel="stylesheet" type="text/css">
+    <link href="./assets/css/baton.css?<?= $_SERVER['ASSETS_CACHEBUSTER'] ?>" rel="stylesheet" type="text/css">
 </head>
 
 <body class="withNavbar withSink">
@@ -246,7 +246,7 @@
         </div>
     </div>
 
-    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/main.js?<?= $_SERVER['ASSETS_CACHEBUSTER'] ?>"></script>
 </body>
 
 </html>

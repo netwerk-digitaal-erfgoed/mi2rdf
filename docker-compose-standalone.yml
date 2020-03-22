@@ -26,6 +26,8 @@ services:
             - "./etc/php/php.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini:ro"
             - "./web:/var/www/html:ro"
             - filestorevolume:/filestore
+        environment:
+            - ASSETS_CACHEBUSTER=v1            
 #       networks:
 #           - traefik
 
