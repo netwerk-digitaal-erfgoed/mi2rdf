@@ -1,5 +1,5 @@
 var myTimer;
-var bUpdateDatasetlist = 0;
+var bUpdateDatasetlist = 1;
 
 let dropArea = document.getElementById('drop-area');
 

@@ -6,7 +6,8 @@ CREATE TABLE `datasets` (
   `org_name` varchar(250) NOT NULL,
   `state` varchar(10) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `converted` timestamp NULL DEFAULT NULL
+  `converted` timestamp NULL DEFAULT NULL,
+  `graph_uri` varchar(250) NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE `datasets`

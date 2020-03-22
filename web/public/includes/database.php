@@ -3,12 +3,15 @@
 function fInsertDataset($guid,$org_name,$state="uploaded") {
 	error_log("DEBUG: fInsertDataset($guid,$org_name,$state)");
 	$mysqli = new mysqli(DB_HOST, DB_PASS, DB_PASS, DB_DATA);
+
 	if ($mysqli->connect_error) {
+		echo "ERROR: Connection failed: " . $mysqli->connect_error;
 		die("ERROR: Connection failed: " . $mysqli->connect_error);
 	} 
 
 	$sql = "INSERT INTO datasets(guid,org_name,state) VALUES (?,?,?)";
 	$stmt = $mysqli->prepare($sql);
+
 	$stmt->bind_param("sss",$guid,$org_name,$state);
 	$stmt->execute();
 
