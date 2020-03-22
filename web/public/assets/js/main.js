@@ -90,9 +90,12 @@ function updateDatasetlist() {
                 listDiv += jsonResponse[i].id + ' - ' + jsonResponse[i].org_name;
                 listDiv += ' &raquo; <span class="' + jsonResponse[i].state + '">'
                 if (jsonResponse[i].state == 'converted') {
-                    listDiv += '<a href="download.php?guid=' + jsonResponse[i].guid + '">';
-                    listDiv += jsonResponse[i].state;
-                    listDiv += '</a>';
+                    listDiv += '<a href="download.php?guid=' + jsonResponse[i].guid + '">download</a>';
+					if (jsonResponse[i].graph_uri == '') {
+						bUnconverted = 1;
+					} else {
+						listDiv += ' - <a target="triply" href="https://data.netwerkdigitaalerfgoed.nl/coret/mi2rdf/table?graph=' + jsonResponse[i].graph_uri + '">graph</a>';
+					}
                 } else {
                     listDiv += jsonResponse[i].state;
                     bUnconverted = 1;
