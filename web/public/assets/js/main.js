@@ -91,7 +91,7 @@ function updateDatasetlist() {
                 listDiv += ' &raquo; <span class="' + jsonResponse[i].state + '">'
                 if (jsonResponse[i].state == 'converted') {
                     listDiv += '<a href="download.php?guid=' + jsonResponse[i].guid + '">download</a>';
-					if (jsonResponse[i].graph_uri == '') {
+					if (jsonResponse[i].graph_uri == null) {
 						bUnconverted = 1;
 					} else {
 						listDiv += ' - <a target="triply" href="https://data.netwerkdigitaalerfgoed.nl/coret/mi2rdf/table?graph=' + jsonResponse[i].graph_uri + '">graph</a>';
