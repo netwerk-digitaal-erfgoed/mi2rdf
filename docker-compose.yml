@@ -49,8 +49,15 @@ services:
         container_name: mi2rdf-consumer
         volumes:
             - filestorevolume:/filestore
+         environment:
+            - TRIPLY_TOKEN=${TRIPLY_TOKEN}
+            - TRIPLY_USER=${TRIPLY_USER}
+            - TRIPLY_DATASET=${TRIPLY_DATASET}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         depends_on:
             - "queue"
+            - "database"
         networks:
             - traefik
 
@@ -67,8 +74,6 @@ services:
         volumes:
             - "./database/config:/docker-entrypoint-initdb.d/:ro"
             - "datavolume:/var/lib/mysql"
-        env_file:
-            - ".env"
         environment:
             - MYSQL_DATABASE=${MYSQL_DATABASE}
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
