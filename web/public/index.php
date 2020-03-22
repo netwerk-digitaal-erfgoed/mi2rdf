@@ -34,12 +34,12 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" id="drop-area">
             <div class="col sink storyBanner">
 
                 <table width="100%" border=0>
                     <tr>
-                        <td id="drop-area" rowspan="3" width="25%">
+                        <td id="drop-area2" rowspan="3" width="25%">
                             <p>Sleep hier &eacute;&eacute;n of meerdere MDWS Internet bestanden heen of klik op onderstaande knop om bestanden te selecteren.</p>
                             <form class="my-form">
                                 <input type="file" multiple id="fileElem" accept=".txt,.zip" onchange="handleFiles(this.files)">
