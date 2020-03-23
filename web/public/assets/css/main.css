@@ -1,150 +1,276 @@
 body {
-     font-family: "Roboto2", "Helvetica Neue", Helvetica, Arial, sans-serif;
-     overflow:hidden;
+	font-family: "Roboto2", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	overflow: hidden;
 }
- .sink {
-     padding: 10px;
-     margin: 10px;
-     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
-     background-color: #fff;
+
+.sink {
+	padding: 10px;
+	margin: 10px;
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+	background-color: #fff;
 }
- .navbar-content {
-     display: flex;
+
+.navbar-content {
+	display: flex;
 }
- .navbar-title {
-     flex-grow: 1;
-     color: #1690c6;
-     display: flex;
-     align-items: center;
+
+.navbar-title {
+	flex-grow: 1;
+	color: #1690c6;
+	display: flex;
+	align-items: center;
 }
- body.withNavbar {
-     min-height: 75rem;
-     padding-top: 4.5rem;
+
+body.withNavbar {
+	min-height: 75rem;
+	padding-top: 4.5rem;
 }
- body.withSink {
-     background-color: #ebedef;
+
+body.withSink {
+	background-color: #ebedef;
 }
- .withNavbar .navbar {
-     padding: 0.3rem 1rem;
-     background-color: hsla(0,0%,100%,.87);
-     box-shadow: 0 0 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+
+.withNavbar .navbar {
+	padding: 0.3rem 1rem;
+	background-color: hsla(0, 0%, 100%, .87);
+	box-shadow: 0 0 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
 }
- .navbar-icon img {
-     height: 2.5rem;
+
+.navbar-icon img {
+	height: 2.5rem;
 }
- #midelbar {
-     background-color:#fdc921;
-     background: -moz-linear-gradient(left, #fdc921 0%, #fefcea 50%, #fdc921 99%);
-    /* FF3.6-15 */
-     background: -webkit-linear-gradient(left, #fdc921 0%,#fefcea 50%,#fdc921 99%);
-    /* Chrome10-25,Safari5.1-6 */
-     background: linear-gradient(to right, #fdc921 0%,#fefcea 50%,#fdc921 99%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+.btn-label {
+	background-color: #007bff;
+	color: white
 }
- .btn-label {
-     background-color:#007bff;
-     color:white 
+
+#fileElem {
+	display: none;
 }
- #fileElem {
-     display: none;
+
+.running {
+	box-shadow: 5px 0px 0px 0px #007bff;
 }
- #drop-area2 {
-     height:240px;
-     background-color:#fdc921;
-     border-left:3px solid #007bff;
-     color:#333;
-     padding:20px;
-     text-align:center;
-     border-top-right-radius:12px;
-     border-bottom-right-radius:12px;
+
+.msgBoxDivStyle {
+	background: rgba(127, 127, 127, 0.6);
+	height: 100%;
+	position: absolute;
+	width: 100%;
+	z-index: 9999;
 }
- #drop-area2.highlight {
-     border-left:2px solid #fdc921;
-     background-color:#007bff;
-     color:white;
+
+.msgBoxTitleStyle {
+	background-color: #fdc921;
+	color: black;
+	text-align: center;
+	font-weight: bold;
+	left: 0px;
+	padding: 4px;
+	top: 0px;
 }
- #datasetlist {
-     background-color:#fdc921;
-     border-right:3px solid #007bff;
-     border-top-left-radius:12px;
-     border-bottom-left-radius:12px;
-     transition: box-shadow 0.6s linear;
+
+.msgBoxContentsStyle {
+	background: rgba(255, 255, 255, 1);
+	background-color: white;
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+	left: 30%;
+	position: absolute;
+	resize: vertical;
+	text-align: center;
+	top: 15%;
+	width: 40%;
 }
- .running {
-     box-shadow: 5px 0px 0px 0px #007bff;
+
+.msgBoxTextStyle {
+	overflow: auto;
+	padding: 20px;
+	text-align: center;
 }
- .delbtn {
-     float:right;
-     width:18px;
-     display:table-cell;
-     background-color:white;
-     border-radius:20px;
-     text-align:center;
-     margin:8px 8px 0 0;
-     font-size:0.8em;
-     opacity:0.8;
+
+.msgBoxButtonStyle {
+	margin: 20px;
+	background-color: #007bff;
+	color: white
 }
- .msgBoxDivStyle {
-     background: rgba(127, 127, 127, 0.6);
-     height: 100%;
-     position: absolute;
-     width: 100%;
-    z-index: 9999;
+
+ul.dlist {
+	list-style: none;
+	margin: 0;
+	color: #333;
+	height: 245px;
+	overflow-y: auto;
 }
- .msgBoxTitleStyle {
-     background-color: #fdc921;
-    color: black;
-    text-align:center;
-    font-weight: bold;
-    left: 0px;
-    padding: 4px;
-    top: 0px;
+
+ul.dlist li::before {
+	content: "\2022";
+	color: #007bff;
+	font-weight: bold;
+	display: inline-block;
+	width: 1em;
+	margin: 5px 0 5px -1em;
 }
- .msgBoxContentsStyle {
-     background: rgba(255, 255, 255, 1);
-    background-color: white;
-     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
-     left: 30%;
-    position: absolute;
-    resize: vertical;
-    text-align: center;
-    top: 15%;
-    width: 40%;
+
+.converting {
+	font-weight: bold;
 }
- .msgBoxTextStyle {
-     overflow: auto;
-    padding: 20px;
-    text-align: center;
+
+.converted {
+	color: green;
 }
- .msgBoxButtonStyle {
-     margin: 20px;
-     background-color:#007bff;
-    color:white 
+
+#drop-area1 {
+	height: 280px
 }
- ul.dlist {
-     list-style: none;
-    /* Remove default bullets */
-     margin:0;
-     color:#333;
-     height:245px;
-     overflow-y:auto;
+
+#drop-area2 {
+	width: 280px;
+	position: absolute;
+	left: 5px
 }
- ul.dlist li::before {
-     content: "\2022";
-    /* Add content: \2022 is the CSS Code/unicode for a bullet */
-     color: #007bff;
-    /* Change the color */
-     font-weight: bold;
-    /* If you want it to be bold */
-     display: inline-block;
-    /* Needed to add space between the bullet and the text */
-     width: 1em;
-    /* Also needed for space (tweak if needed) */
-     margin:5px 0 5px -1em;
+
+#midelbar {
+	width: 330px;
 }
- .converting {
-     font-weight:bold;
+
+#drop-area2 {
+	height: 240px;
+	background-color: #fdc921;
+	border-left: 3px solid #007bff;
+	color: #333;
+	padding: 20px;
+	text-align: center;
+	border-top-right-radius: 12px;
+	border-bottom-right-radius: 12px;
 }
- .converted {
-     color:green;
+
+#drop-area2.highlight {
+	border-left: 2px solid #fdc921;
+	background-color: #007bff;
+	color: white;
+}
+
+#datasetlist {
+	height: 240px;
+	width: 510px;
+	position: absolute;
+	right: 5px;
+	background-color: #fdc921;
+	border-right: 3px solid #007bff;
+	border-top-left-radius: 12px;
+	border-bottom-left-radius: 12px;
+	transition: box-shadow 0.6s linear;
+}
+
+#koppelstuk {
+	height: 80px;
+	top: 90px;
+	position: absolute;
+	width: 330px;
+	left: 280px;
+	background-color: #fdc921;
+}
+
+.headcol {
+	text-align: center;
+	margin: 30px 0 30px 0
+}
+
+.baton-container {
+	display: none;
+}
+
+.delbtn {
+	float: right;
+	width: 40px;
+	display: table-cell;
+	background-color: white;
+	border-radius: 20px;
+	text-align: center;
+	margin: 8px 8px 0 0;
+	font-size: 0.8em;
+	opacity: 0.8;
+}
+
+@media screen and (min-width: 1199px) {
+	.baton-container {
+		display: block;
+	}
+	.delbtn {
+		width: 18px;
+	}
+	#koppelstuk {
+		height: 80px;
+		top: 90px;
+		position: absolute;
+		width: 330px;
+		left: 280px;
+		background-color: #fdc921;
+		background: -moz-linear-gradient(left, #fdc921 0%, #fefcea 50%, #fdc921 99%);
+		background: -webkit-linear-gradient(left, #fdc921 0%, #fefcea 50%, #fdc921 99%);
+		background: linear-gradient(to right, #fdc921 0%, #fefcea 50%, #fdc921 99%);
+	}
+}
+
+@media screen and (max-width: 991px) {
+	#midelbar {
+		width: 60px;
+		background-color: #fdc921;
+		height: 30px;
+		position: relative;
+		margin: 0 auto;
+		height: 60px;
+	}
+	#koppelstuk {
+		display: none;
+	}
+	#drop-area1,
+	#drop-area2 {
+		width: 100%;
+	}
+	#datasetlist {
+		width: 100%;
+		margin: 0;
+		position: relative;
+	}
+	#drop-area2 {
+		position: relative;
+		margin: 0;
+		height: auto
+	}
+	#drop-area1 {
+		height: 530px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.sink,
+	.row,
+	.container {
+		padding: 0px;
+		margin: 0px;
+	}
+	.sink {
+		box-shadow: none;
+		background-color: transparent;
+		margin: -30px 0 0 0;
+	}
+	.h1,
+	h1 {
+		margin-top: 25px;
+	}
+	#koppelstuk {
+		display: none;
+	}
+	#drop-area2 {
+		margin: 10px 0 0 0;
+		border-radius: 0;
+	}
+	#datasetlist {
+		border-radius: 0;
+	}
+	.headcol {
+		margin: 10px 0 30px 0
+	}
 }
