@@ -28,7 +28,8 @@ if [ -e "/filestore/$guid.ttl" ]; then
 		JOBID=`grep -o -E "\"jobId\":\s+\".*\"" $JSON | awk -F\" '{print $4}'`
 		STATUS=`grep -o -E "\"status\":\s+\".*\"" $JSON | awk -F\" '{print $4}'`
 
-		MAXTRIES=30
+		# 5 minuten
+		MAXTRIES=300
 
 		while [[ ( "$STATUS" = "downloading" || "$STATUS" = "cleaning"  || "$STATUS" = "indexing" || "$STATUS" = "created" ) && $MAXTRIES>0 ]]; do
 			echo "MAXTRIES: $MAXTRIES"	
@@ -43,7 +44,7 @@ if [ -e "/filestore/$guid.ttl" ]; then
 			graph=`grep -o -E https://data.netwerkdigitaalerfgoed.nl/$TRIPLY_USER/$TRIPLY_DATASET/graphs/[a-z0-9\-]+ $JSON`
 			mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD -e "UPDATE datasets SET graph_uri='$graph' WHERE guid='$guid'"
 			echo "GRAPH: $graph"
-			rm JSON
+			rm $JSON
 		fi
 	else
 		mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD -e "UPDATE datasets SET graph_uri='' WHERE guid='$guid'"
