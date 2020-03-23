@@ -112,6 +112,10 @@ ul.dlist li::before {
 	margin: 5px 0 5px -1em;
 }
 
+ul.dlist li {
+	clear: right;
+}
+
 .converting {
 	font-weight: bold;
 }
