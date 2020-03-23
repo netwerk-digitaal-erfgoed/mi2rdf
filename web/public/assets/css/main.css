@@ -50,7 +50,7 @@ body.withSink {
 }
 
 .running {
-	box-shadow: 5px 0px 0px 0px #007bff;
+	box-shadow: 5px 0 0 0 #007bff;
 }
 
 .msgBoxDivStyle {
@@ -66,9 +66,9 @@ body.withSink {
 	color: black;
 	text-align: center;
 	font-weight: bold;
-	left: 0px;
+	left: 0;
 	padding: 4px;
-	top: 0px;
+	top: 0;
 }
 
 .msgBoxContentsStyle {
@@ -177,10 +177,6 @@ ul.dlist li::before {
 	margin: 30px 0 30px 0
 }
 
-.baton-container {
-	display: none;
-}
-
 .delbtn {
 	float: right;
 	width: 40px;
@@ -193,30 +189,37 @@ ul.dlist li::before {
 	opacity: 0.8;
 }
 
-@media screen and (min-width: 1199px) {
-	.baton-container {
-		display: block;
+@media screen and (max-width: 500px) {
+	.sink,
+	.row,
+	.container {
+		padding: 0;
+		margin: 0;
 	}
-	.delbtn {
-		width: 18px;
+	.sink {
+		box-shadow: none;
+		background-color: transparent;
+		margin: -30px 0 0 0;
+	}
+	h1 {
+		display:none;
 	}
 	#koppelstuk {
-		height: 80px;
-		top: 90px;
-		position: absolute;
-		width: 330px;
-		left: 280px;
-		background-color: #fdc921;
-		background: -moz-linear-gradient(left, #fdc921 0%, #fefcea 50%, #fdc921 99%);
-		background: -webkit-linear-gradient(left, #fdc921 0%, #fefcea 50%, #fdc921 99%);
-		background: linear-gradient(to right, #fdc921 0%, #fefcea 50%, #fdc921 99%);
+		display: none;
+	}
+	#drop-area2 {
+		margin: 10px 0 0 0;
+		border-radius: 0;
+	}
+	#datasetlist {
+		border-radius: 0;
 	}
 }
 
 @media screen and (max-width: 991px) {
 	#midelbar {
 		width: 60px;
-		background-color: #fdc921;
+		background: #fdc921;
 		height: 30px;
 		position: relative;
 		margin: 0 auto;
@@ -244,33 +247,19 @@ ul.dlist li::before {
 	}
 }
 
-@media screen and (max-width: 500px) {
-	.sink,
-	.row,
-	.container {
-		padding: 0px;
-		margin: 0px;
-	}
-	.sink {
-		box-shadow: none;
-		background-color: transparent;
-		margin: -30px 0 0 0;
-	}
-	.h1,
-	h1 {
-		margin-top: 25px;
+@media screen and (min-width: 1199px) {
+	.delbtn {
+		width: 18px;
 	}
 	#koppelstuk {
-		display: none;
-	}
-	#drop-area2 {
-		margin: 10px 0 0 0;
-		border-radius: 0;
-	}
-	#datasetlist {
-		border-radius: 0;
-	}
-	.headcol {
-		margin: 10px 0 30px 0
+		height: 80px;
+		top: 90px;
+		position: absolute;
+		width: 330px;
+		left: 280px;
+		background-color: #fdc921;
+		background: -moz-linear-gradient(left, #fdc921 0%, #fefcea 50%, #fdc921 99%);
+		background: -webkit-linear-gradient(left, #fdc921 0%, #fefcea 50%, #fdc921 99%);
+		background: linear-gradient(to right, #fdc921 0%, #fefcea 50%, #fdc921 99%);
 	}
 }

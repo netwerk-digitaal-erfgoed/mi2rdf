@@ -1,16 +1,17 @@
-/*
-body {
-  display: flex;
-  align-items: center;
-  height: 100vh;
-  background-color: #001524;
-}
-*/
 .baton-container {
-  display: block;
-  height: 280px;
-  width: 280px;
-  margin: 0 auto;
+	display: none;
+}
+
+@media screen and (min-width: 1199px) {
+	.baton-container {
+		display: block;
+		height: 280px;
+		width: 280px;
+		margin: 0 auto;
+		position:absolute;
+		left:295px;
+		top:0;
+	}
 }
 
 .baton {

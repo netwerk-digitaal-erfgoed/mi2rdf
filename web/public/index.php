@@ -46,7 +46,7 @@
 				</div>
 				<div id="midelbar">
 					<div id="koppelstuk"></div>
-	                <div class="baton-container" style="position:absolute;left:295px;top:0px;">
+	                <div class="baton-container">
 						<div class="baton-0">
 							<div class="metronome">
 								<div class="baton"></div>
