@@ -5,8 +5,10 @@ read guid
 mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD -e "UPDATE datasets SET state='converting' WHERE guid='$guid'"
 
 # Do conversion magic 
-node /MDWS-to-JSON/index.js /filestore/$guid.txt > /filestore/$guid.json 2> /filestore/$guid.json.err
-node /MDWS-JSON-to-Turtle/index.js /filestore/$guid.json > /filestore/$guid.ttl 2> /filestore/$guid.ttl.err
+cd /MDWS-to-JSON
+node ./index.js /filestore/$guid.txt > /filestore/$guid.json 2> /filestore/$guid.json.err
+cd /MDWS-JSON-to-Turtle
+node ./index.js /filestore/$guid.json > /filestore/$guid.ttl 2> /filestore/$guid.ttl.err
 
 if [ -e "/filestore/$guid.ttl" ]; then
 	mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD -e "UPDATE datasets SET state='converted',converted=NOW() WHERE guid='$guid'"
