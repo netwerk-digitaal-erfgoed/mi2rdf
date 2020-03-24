@@ -80,28 +80,38 @@ function updateDatasetlist() {
     var req = new XMLHttpRequest();
     req.responseType = 'json';
     req.open('GET', url, true);
-    req.onload = function() {
+	
+	req.onload = function() {
         if (req.response) {
             var jsonResponse = req.response;
             var listDiv = "<ul class='dlist'>";
             var bUnconverted = 0;
+			var namecutoff=32;
             for (var i = 0; i < jsonResponse.length; i++) {
                 listDiv += '<li id="dataset_' + jsonResponse[i].guid + '" title="Originele bestandsnaam: ' + jsonResponse[i].org_name + ' | Aangeleverd: ' + jsonResponse[i].created + ' | Omgezet: ' + jsonResponse[i].converted + '">';
-                listDiv += jsonResponse[i].id + ' - ' + jsonResponse[i].org_name;
-                listDiv += ' &raquo; <span class="' + jsonResponse[i].state + '">'
+                listDiv += '<span class="nrid">'+jsonResponse[i].id + '</span> ';
+				if (jsonResponse[i].org_name.length<namecutoff) {
+					listDiv += jsonResponse[i].org_name;
+				} else {
+					listDiv += jsonResponse[i].org_name.substr(0,namecutoff-3)+'&hellip;';
+				}
+				
+                listDiv += '<a class="lstbtn" title="Verwijder deze dataset" href="#" onclick="deldataset(\'' + jsonResponse[i].guid + '\')"><img height="16" src="assets/imgs/trash.svg"></a>';
                 if (jsonResponse[i].state == 'converted') {
-                    listDiv += '<a href="download.php?guid=' + jsonResponse[i].guid + '">download</a>';
+                    listDiv += '<a class="lstbtn" title="Downoad deze dataset (in Turtle formaat)" href="download.php?guid=' + jsonResponse[i].guid + '"><img height="22" src="assets/imgs/download.svg"></a>';
 					if (jsonResponse[i].graph_uri == null) {
 						bUnconverted = 1;
 					} else {
-						listDiv += ' - <a target="triply" href="https://data.netwerkdigitaalerfgoed.nl/coret/mi2rdf/table?graph=' + jsonResponse[i].graph_uri + '">graph</a>';
+						listDiv += '<a class="lstbtn" title="Bekijk deze dataset als graph" target="triply" href="https://data.netwerkdigitaalerfgoed.nl/coret/mi2rdf/table?graph=' + jsonResponse[i].graph_uri + '"><img height="24" src="assets/imgs/cloud.svg"></a>';
 					}
                 } else {
+					listDiv += ' &raquo; <span class="' + jsonResponse[i].state + '">'
                     listDiv += jsonResponse[i].state;
+					listDiv += '</span>';
                     bUnconverted = 1;
                 }
-                listDiv += '</span>';
-                listDiv += '<a class="delbtn" title="Verwijder deze dataset" href="#" onclick="deldataset(\'' + jsonResponse[i].guid + '\')">x</a>';
+				
+
                 listDiv += '</li>';
             }
             listDiv += '</ul>';

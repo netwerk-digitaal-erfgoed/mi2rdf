@@ -3,7 +3,7 @@
 include('includes/config.php');
 include('includes/database.php');
 
-$datasets=arrGetDatasets(20);
+$datasets=arrGetDatasets(200);
 
 header('Content-Type: application/json');
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
