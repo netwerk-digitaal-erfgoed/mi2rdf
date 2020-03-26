@@ -41,7 +41,7 @@ if [ -e "/filestore/$guid.ttl" ]; then
 		done
 
 		if [ "$STATUS" == "finished" ]; then
-			graph=`grep -o -E https://data.netwerkdigitaalerfgoed.nl/[a-z]+/$TRIPLY_DATASET/graphs/[a-z0-9\-]+ $JSON`
+			graph=`grep -o -E https://data.netwerkdigitaalerfgoed.nl/[a-z0-9]+/$TRIPLY_DATASET/graphs/[a-z0-9\-]+ $JSON`
 			mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD -e "UPDATE datasets SET graph_uri='$graph' WHERE guid='$guid'"
 			echo "GRAPH: $graph"
 			rm $JSON
