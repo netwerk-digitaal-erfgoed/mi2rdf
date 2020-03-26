@@ -195,6 +195,10 @@ ul.dlist li {
 	padding:2px;
 }
 
+.lstbtn:hover {
+	opacity: 1;
+}
+
 .nrid {
 	color:#007bff;
 	font-size:0.6em;

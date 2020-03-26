@@ -102,7 +102,7 @@ function updateDatasetlist() {
 					if (jsonResponse[i].graph_uri == null) {
 						bUnconverted = 1;
 					} else {
-						listDiv += '<a class="lstbtn" title="Bekijk deze dataset als graph" target="triply" href="https://data.netwerkdigitaalerfgoed.nl/coret/mi2rdf/table?graph=' + jsonResponse[i].graph_uri + '"><img height="24" src="assets/imgs/cloud.svg"></a>';
+						listDiv += '<a class="lstbtn" title="Bekijk deze dataset als graph" target="triply" href="https://data.netwerkdigitaalerfgoed.nl/MI2RDF/mi2rdf/table?graph=' + jsonResponse[i].graph_uri + '"><img height="24" src="assets/imgs/cloud.svg"></a>';
 					}
                 } else {
 					listDiv += ' &raquo; <span class="' + jsonResponse[i].state + '">'
