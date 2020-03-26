@@ -12,12 +12,6 @@ function fInsertDataset($guid,$org_name,$state="uploaded") {
 	$stmt = $mysqli->prepare($sql);
 	$stmt->bind_param("sss",$guid,$org_name,$state);
 	$stmt->execute();
-
-	if (mysqli_query($mysqli, $sql)) {
-		error_log("INFO: New record created successfully");
-	} else {
-		error_log("ERROR: " . $sql . "" . mysqli_error($mysqli));
-	}
 	$mysqli->close();
 }
 

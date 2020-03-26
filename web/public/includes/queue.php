@@ -4,12 +4,14 @@ require_once '/var/www/html/vendor/autoload.php';
 use PhpAmqpLib\Connection\AMQPConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-function fAddToQueue($guid) {	
-	error_log("INFO: fAddToQueue($guid)");
+function fAddToQueue($guid,$filename) {	
+	error_log("INFO: fAddToQueue($guid,$filename)");
+	
+	$content=$guid."|".preg_replace('/[^a-z0-9_\-]/i','',preg_replace('/\.txt$/i','',$filename));
 	$connection = new AMQPConnection(RABBIT_HOST, RABBIT_PORT, RABBIT_USER, RABBIT_PASS);
 	$channel = $connection->channel();
 	$channel->queue_declare(RABBIT_QUEUE_NAME, true, false, false, false);
-	$msg = new AMQPMessage($guid, array('delivery_mode' => 2)); # make message persistent
+	$msg = new AMQPMessage($content, array('delivery_mode' => 2)); # make message persistent
 	$channel->basic_publish($msg, '', RABBIT_QUEUE_NAME);
 	$channel->close();
 	$connection->close();

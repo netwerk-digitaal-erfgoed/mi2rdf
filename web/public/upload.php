@@ -26,7 +26,7 @@ if ($_FILES["file"]["size"]>0) {
 						$guid=GUID();
 						rename($tmpdir.$list[$i],UPLOAD_DIR.$guid.".txt");
 						fInsertDataset($guid,$list[$i]);
-						fAddToQueue($guid);
+						fAddToQueue($guid,$list[$i]);
 						error_log("INFO: file $list[$i] from uploaded $uploadedfile as ".UPLOAD_DIR.$guid.".txt");
 					}
 				}
@@ -36,7 +36,7 @@ if ($_FILES["file"]["size"]>0) {
 				if (move_uploaded_file($_FILES['file']['tmp_name'], UPLOAD_DIR.$guid.".txt")) {
 					error_log("INFO: file uploaded ".UPLOAD_DIR.$guid.".txt");
 					fInsertDataset($guid,$uploadedfile);
-					fAddToQueue($guid);
+					fAddToQueue($guid,$uploadedfile);
 				} else {
 					error_log("WARN: Possible file upload attack $uploadedfile!");
 				}
