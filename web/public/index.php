@@ -35,7 +35,7 @@
 
         <div class="row" id="drop-area1">
             <div class="col sink storyBanner">
-
+				<div id="uploadprogress"></div>
 				<div id="drop-area2">
 					<p>Sleep hier &eacute;&eacute;n of meerdere MDWS Internet bestanden heen of klik op onderstaande knop om bestanden te selecteren.</p>
 					<form class="my-form">

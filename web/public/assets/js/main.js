@@ -70,6 +70,11 @@ function uploadFile(file) {
         }
     })
     formData.append('file', file);
+    xhr.upload.onprogress = function (e) {
+        if (e.lengthComputable) {
+            document.getElementById("uploadprogress").style.height=Math.ceil(240*e.loaded/e.total)+"px";
+        }
+    }
     xhr.send(formData);
 }
 
