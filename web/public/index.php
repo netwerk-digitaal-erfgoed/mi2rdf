@@ -21,7 +21,7 @@
                 </a>
             </div>
             <div class="navbar-title">
-                <a class="navbar-brand" href=".">MI2RDF</a>
+                MI2RDF <?= $_SERVER['ASSETS_CACHEBUSTER'] ?>
             </div>
         </div>
     </nav>
