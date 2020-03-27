@@ -75,6 +75,15 @@ function uploadFile(file) {
             document.getElementById("uploadprogress").style.height=Math.ceil(240*e.loaded/e.total)+"px";
         }
     }
+    xhr.onloadstart = function(e) {
+        document.getElementById("uploadprogress").style.height="0px";
+        document.getElementById("uploadprogress").style.width="8px";
+        document.getElementById("uploadprogress").style.marginLeft="0px";
+    }
+    xhr.onloadend = function(e) {
+        document.getElementById("uploadprogress").style.width="3px";
+        document.getElementById("uploadprogress").style.marginLeft="5px";
+    }
     xhr.send(formData);
 }
 
