@@ -21,7 +21,7 @@
                 </a>
             </div>
             <div class="navbar-title">
-                MI2RDF <?= $_SERVER['ASSETS_CACHEBUSTER'] ?>
+                <span title="MDWS-JSON-to-Turtle <?= file_get_contents("/filestore/MDWS-JSON-to-Turtle.dat") ?> MDWS-to-JSON <?= file_get_contents("/filestore/MDWS-to-JSON.dat") ?>">MI2RDF <?= $_SERVER['ASSETS_CACHEBUSTER'] ?></span>
             </div>
         </div>
     </nav>
