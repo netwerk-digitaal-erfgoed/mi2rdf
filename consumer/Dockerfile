@@ -10,7 +10,5 @@ RUN chmod a+x /*.sh
 
 RUN git clone https://github.com/netwerk-digitaal-erfgoed/MDWS-JSON-to-Turtle.git && cd MDWS-JSON-to-Turtle ; npm install
 RUN git clone https://github.com/netwerk-digitaal-erfgoed/MDWS-to-JSON.git && cd MDWS-to-JSON ; npm install
-RUN stat -c %y /MDWS-JSON-to-Turtle/index.js | sed -e "s/\\..*//" > /filestore/MDWS-JSON-to-Turtle.dat
-RUN stat -c %y /MDWS-to-JSON/index.js | sed -e "s/\\..*//" > /filestore/MDWS-to-JSON.dat 
 
 CMD ["/startup.sh"]
