@@ -1,7 +1,7 @@
 <?php
 
 function fInsertDataset($guid,$org_name,$state="uploaded") {
-	$mysqli = new mysqli(DB_HOST, DB_PASS, DB_PASS, DB_DATA);
+	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATA);
 
 	if ($mysqli->connect_error) {
 		error_log("ERROR: Connection failed: " . $mysqli->connect_error);
@@ -16,7 +16,7 @@ function fInsertDataset($guid,$org_name,$state="uploaded") {
 }
 
 function fDeleteDataset($guid) {
-	$mysqli = new mysqli(DB_HOST, DB_PASS, DB_PASS, DB_DATA);
+	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATA);
 	if ($mysqli->connect_error) {
 		die("ERROR: Connection failed: " . $mysqli->connect_error);
 	} 
@@ -30,7 +30,7 @@ function fDeleteDataset($guid) {
 }
 
 function arrGetDataset($guid) {
-	$mysqli = new mysqli(DB_HOST, DB_PASS, DB_PASS, DB_DATA);
+	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATA);
 	if ($mysqli->connect_errno) {
 		die("ERROR: Connection failed: " . $mysqli->connect_error);
 	} 
@@ -51,7 +51,7 @@ function arrGetDataset($guid) {
 }
 
 function arrGetDatasets($last=5) {
-	$mysqli = new mysqli(DB_HOST, DB_PASS, DB_PASS, DB_DATA);
+	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATA);
 	if ($mysqli->connect_errno) {
 		die("ERROR: Connection failed: " . $mysqli->connect_error);
 	} 

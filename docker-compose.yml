@@ -13,8 +13,6 @@ services:
             - "traefik.port=80"
         networks:
             - traefik
-#       ports:
-#           - "80:80"
         depends_on:
             - php
             - database
@@ -38,11 +36,8 @@ services:
             - "queuevolume:/var/lib/rabbitmq/mnesia/"
             - "./queue/config/definitions.json:/opt/definitions.json:ro"
             - "./queue/config/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro"
-        ports:
-            - "15672:15672"
-            - "5672:5672"
-        environment:
-            - RABBITMQ_ERLANG_COOKIE='en_dee_eee'
+        env_file:
+            - ".env"
         networks:
             - traefik
 
@@ -74,8 +69,6 @@ services:
             - "datavolume:/var/lib/mysql"
         env_file:
             - ".env"
-        ports:
-            - "3306:3306"
         networks:
             - traefik
 
