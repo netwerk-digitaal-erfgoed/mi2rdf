@@ -2,10 +2,10 @@
 
 define("UPLOAD_DIR","/filestore/");
 
-define("DB_HOST",getenv('MYSQL_DATABASE'));
+define("DB_HOST","mi2rdf-database");
 define("DB_USER",getenv('MYSQL_USER'));
 define("DB_PASS",getenv('MYSQL_PASSWORD'));
-define("DB_DATA","mi2rdf");
+define("DB_DATA",getenv('MYSQL_DATABASE'));
 
 define('RABBIT_HOST', 'mi2rdf-queue');
 define('RABBIT_PORT', 5672);
