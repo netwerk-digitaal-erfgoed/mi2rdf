@@ -89,6 +89,8 @@
 
 	function updateDatasetlist() {
 
+		$('[data-toggle="tooltip"]').tooltip('dispose');
+		
 		clearTimeout(myTimer);
 		var url = 'datasets.php'
 		var req = new XMLHttpRequest();
@@ -119,13 +121,13 @@
 						listDiv += '<a class="lstbtn" data-toggle="tooltip" data-placement="top" title="Downoad deze dataset (in Turtle formaat)" href="download.php?guid=' + jsonResponse[i].guid + '"><img height="22" src="assets/imgs/download.svg"></a>';
 						if (jsonResponse[i].graph_uri == null) {
 							bUnconverted = 1;
-							listDiv += ' &raquo; <span class="converting">to Triply</span>';
+							listDiv += '<br>&raquo; <span class="converting">To Triply</span>';
 						} else {
 							listDiv += '<a class="lstbtn" data-toggle="tooltip" data-placement="top" title="Bekijk deze dataset als graph" target="triply" href="https://data.netwerkdigitaalerfgoed.nl/MI2RDF/mi2rdf/table?graph=' + jsonResponse[i].graph_uri + '"><img height="24" src="assets/imgs/cloud.svg"></a>';
 						}
 					} else {
-						listDiv += ' &raquo; <span class="' + jsonResponse[i].state + '">'
-						listDiv += jsonResponse[i].state;
+						listDiv += '<br>&raquo; <span class="' + jsonResponse[i].state + '">'
+						listDiv += jsonResponse[i].state[0].toUpperCase() + jsonResponse[i].state.slice(1);
 						listDiv += '</span>';
 						bUnconverted = 1;
 					}

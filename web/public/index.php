@@ -42,7 +42,7 @@
 					<p>Sleep hier &eacute;&eacute;n of meerdere MDWS Internet bestanden heen of klik op onderstaande knop om bestanden te selecteren.</p>
 					<form class="my-form">
 						<input type="file" multiple id="fileElem" accept=".txt,.zip" onchange="handleFiles(this.files)">
-						<label title="Maximale grootte per bestand is 500MB. De .txt bestanden kunnen ook gecomprimeerd en/of gebundeld worden in een .zip bestand." class="btn btn-block btn-label" for="fileElem">Selecteer bestand(en)</label>
+						<label data-toggle="tooltip" data-placement="bottom" title="Maximale grootte per bestand is 500MB. De .txt bestanden kunnen ook gecomprimeerd en/of gebundeld worden in een .zip bestand." class="btn btn-block btn-label" for="fileElem">Selecteer bestand(en)</label>
 					</form>
 					Het vertrippelen naar de<br><a target="triply" href="https://data.netwerkdigitaalerfgoed.nl/MI2RDF/mi2rdf">(demo) triplestore</a> start direct.
 				</div>
