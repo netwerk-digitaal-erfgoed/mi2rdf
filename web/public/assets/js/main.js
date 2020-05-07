@@ -148,7 +148,7 @@
 				  $('#logModal').modal('show').find('.modal-body').load($(this).attr('href'));
 				});
 				
-				$('[data-toggle="tooltip"]').tooltip()
+				$('[data-toggle="tooltip"]').tooltip({trigger : 'hover'});
 			}
 		};
 		req.send(null);
