@@ -7,7 +7,9 @@
     <meta name="description" content="LODwrapper om MDWS Internet bestanden te converteren naar triples.">
     <link href="./assets/imgs/nde_logo_simplified.png" rel="icon" type="image/png">
     <title>MI2RDF</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" crossorigin="anonymous"></script>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
     <link href="./assets/css/main.css?<?= $_SERVER['ASSETS_CACHEBUSTER'] ?>" rel="stylesheet" type="text/css">
     <link href="./assets/css/baton.css?<?= $_SERVER['ASSETS_CACHEBUSTER'] ?>" rel="stylesheet" type="text/css">
 </head>
@@ -21,7 +23,7 @@
                 </a>
             </div>
             <div class="navbar-title">
-                <span title="MDWS-JSON-to-Turtle <?= file_get_contents("/filestore/MDWS-JSON-to-Turtle.dat") ?> MDWS-to-JSON <?= file_get_contents("/filestore/MDWS-to-JSON.dat") ?>">MI2RDF <?= $_SERVER['ASSETS_CACHEBUSTER'] ?></span>
+                <span  data-toggle="tooltip" data-placement="right" data-html="true" title="<b>Gebruikt componenten</b>:<br>MDWS-JSON-to-Turtle versie <?= file_get_contents("/filestore/MDWS-JSON-to-Turtle.dat") ?><br>MDWS-to-JSON <?= file_get_contents("/filestore/MDWS-to-JSON.dat") ?>">MI2RDF <?= $_SERVER['ASSETS_CACHEBUSTER'] ?></span>
             </div>
         </div>
     </nav>
@@ -234,6 +236,24 @@
             </div>
         </div>
     </div>
+
+	<div class="modal fade" id="logModal" tabindex="-1" role="dialog" aria-labelledby="logModalTitle" aria-hidden="true">
+	  <div class="modal-dialog  modal-dialog-scrollable" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="logModalTitle">Logging</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-body">
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-primary" data-dismiss="modal">Sluiten</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
 
     <script src="./assets/js/main.js?<?= $_SERVER['ASSETS_CACHEBUSTER'] ?>"></script>
 </body>

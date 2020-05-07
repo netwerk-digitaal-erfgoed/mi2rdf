@@ -196,7 +196,7 @@ ul.dlist li {
 
 .lstbtn {
 	float: right;
-	width: 40px;
+	width: 32px;
 	display: table-cell;
 	background-color: white;
 	border-radius: 20px;
@@ -287,4 +287,40 @@ ul.dlist li {
 		background: -webkit-linear-gradient(left, #fdc921 0%, #fefcea 50%, #fdc921 99%);
 		background: linear-gradient(to right, #fdc921 0%, #fefcea 50%, #fdc921 99%);
 	}
+}
+
+@media (min-width: 576px) {
+	.modal-dialog-scrollable {
+		max-height: calc(100% - 3.5rem);
+	}
+
+	.modal-dialog {
+		max-width: 90%;
+		margin: 1.75rem auto;
+	}
+}
+
+.tooltip-inner {
+    max-width: 400px;
+    background-color: #338bd3;
+}
+
+.tooltip.show {
+    opacity: 1;
+}
+
+.tooltip.bs-tooltip-auto[x-placement^=top] .arrow::before, .tooltip.bs-tooltip-top .arrow::before {
+    border-top-color: #338bd3;
+}
+
+.tooltip.bs-tooltip-auto[x-placement^=right] .arrow::before, .tooltip.bs-tooltip-right .arrow::before {
+    border-right-color: #338bd3;
+}
+
+.tooltip.bs-tooltip-auto[x-placement^=bottom] .arrow::before, .tooltip.bs-tooltip-bottom .arrow::before {
+    border-bottom-color: #338bd3;
+}
+
+.tooltip.bs-tooltip-auto[x-placement^=left] .arrow::before, .tooltip.bs-tooltip-left .arrow::before {
+    border-left-color: #338bd3;
 }
