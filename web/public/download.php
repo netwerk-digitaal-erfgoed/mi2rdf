@@ -2,9 +2,14 @@
 
 include('includes/config.php');
 
+$type="ttl";
+if (isset($_GET["type"]) && ($type=="ttl" || $type=="json" || $type=="txt")) {
+	$type=$_GET["type"];
+}
+
 if (isset($_GET["guid"])) {
 	$guid=preg_replace('/[^A-F0-9\-]/i','',$_GET["guid"]);
-	$file=$guid.".ttl";
+	$file=$guid.".".$type;
 	if(file_exists(UPLOAD_DIR.$file)) {
 		send_file(UPLOAD_DIR,$file);		
 	} else {

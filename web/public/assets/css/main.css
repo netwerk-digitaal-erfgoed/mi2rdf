@@ -290,11 +290,11 @@ ul.dlist li {
 }
 
 @media (min-width: 576px) {
-	.modal-dialog-scrollable {
+	#logModal .modal-dialog-scrollable {
 		max-height: calc(100% - 3.5rem);
 	}
 
-	.modal-dialog {
+	#logModal .modal-dialog {
 		max-width: 90%;
 		margin: 1.75rem auto;
 	}

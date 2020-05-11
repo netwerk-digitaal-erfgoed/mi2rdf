@@ -118,7 +118,7 @@
 					listDiv += '<a class="lstbtn logmodal" data-toggle="tooltip" data-placement="top" title="Bekijk de logging" href="logging.php?guid=' + jsonResponse[i].guid + '"><img height="16" src="assets/imgs/logging.svg"></a>';
 					
 					if (jsonResponse[i].state == 'converted') {
-						listDiv += '<a class="lstbtn" data-toggle="tooltip" data-placement="top" title="Downoad deze dataset (in Turtle formaat)" href="download.php?guid=' + jsonResponse[i].guid + '"><img height="22" src="assets/imgs/download.svg"></a>';
+						listDiv += '<a class="lstbtn downloadmodal" data-toggle="tooltip" data-guid="' + jsonResponse[i].guid + '" data-placement="top" title="Downoad deze dataset" href="#"><img height="22" src="assets/imgs/download.svg"></a>';
 						if (jsonResponse[i].graph_uri == null) {
 							bUnconverted = 1;
 							listDiv += '<br>&nbsp;&raquo; <span class="converting">To Triply</span>';
@@ -146,9 +146,18 @@
 				document.getElementById('datasetlist').innerHTML = listDiv;
 				
 				$('.logmodal').on('click', function(e){
-				  e.preventDefault();
-				  $('.modal-body').html("<p style='text-align:center'>Logfile wordt geladen ...</p>");
-				  $('#logModal').modal('show').find('.modal-body').load($(this).attr('href'));
+				  e.preventDefault()
+				  $('#logModalBody').html("<p style='text-align:center'>Logfile wordt geladen ...</p>");
+				  $('#logModal').modal('show');
+				  $('#logModalBody').load($(this).attr('href'));
+				});
+	
+				$('.downloadmodal').on('click', function(e){
+				  var guid = $(this).attr('data-guid');
+				  $('#dtxt').attr('href','download.php?guid='+guid+'&type=txt');
+				  $('#djson').attr('href','download.php?guid='+guid+'&type=json');
+				  $('#dttl').attr('href','download.php?guid='+guid+'&type=ttl');
+				  $('#downloadModal').modal('show');
 				});
 				
 				$('[data-toggle="tooltip"]').tooltip({trigger : 'hover'});

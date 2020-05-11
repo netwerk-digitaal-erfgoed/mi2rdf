@@ -237,16 +237,35 @@
         </div>
     </div>
 
+	<div class="modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-labelledby="downloadModalTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="downloadModalTitle">Download als ...</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  </div>
+		  <div class="modal-body">
+		  <ul>
+		  <li><a id="dtxt" href="#">Tekst bestand</a></li>
+		  <li><a id="djson" href="#">JSON bestand</a></li>
+		  <li><a id="dttl"  href="#">Turtle bestand</a></li>
+		  </ul>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-primary" data-dismiss="modal">Sluiten</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+
 	<div class="modal fade" id="logModal" tabindex="-1" role="dialog" aria-labelledby="logModalTitle" aria-hidden="true">
-	  <div class="modal-dialog  modal-dialog-scrollable" role="document">
+	  <div class="modal-dialog modal-dialog-scrollable" role="document">
 		<div class="modal-content">
 		  <div class="modal-header">
 			<h5 class="modal-title" id="logModalTitle">Logging</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			  <span aria-hidden="true">&times;</span>
-			</button>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Sluiten"><span aria-hidden="true">&times;</span></button>
 		  </div>
-		  <div class="modal-body">
+		  <div class="modal-body" id="logModalBody">
 		  </div>
 		  <div class="modal-footer">
 			<button type="button" class="btn btn-primary" data-dismiss="modal">Sluiten</button>
