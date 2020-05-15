@@ -118,7 +118,7 @@
 					listDiv += '<a class="lstbtn logmodal" data-toggle="tooltip" data-placement="top" title="Bekijk de logging" href="logging.php?guid=' + jsonResponse[i].guid + '"><img height="16" src="assets/imgs/logging.svg"></a>';
 					
 					if (jsonResponse[i].state == 'converted') {
-						listDiv += '<a class="lstbtn downloadmodal" data-toggle="tooltip" data-guid="' + jsonResponse[i].guid + '" data-placement="top" title="Downoad deze dataset" href="#"><img height="22" src="assets/imgs/download.svg"></a>';
+						listDiv += '<a class="lstbtn downloadmodal" data-toggle="tooltip" data-guid="' + jsonResponse[i].guid + '" data-placement="top" title="Download deze dataset" href="#"><img height="22" src="assets/imgs/download.svg"></a>';
 						if (jsonResponse[i].graph_uri == null) {
 							bUnconverted = 1;
 							listDiv += '<br>&nbsp;&raquo; <span class="converting">To Triply</span>';
