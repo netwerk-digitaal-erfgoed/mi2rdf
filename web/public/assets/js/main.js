@@ -154,7 +154,7 @@
 	
 				$('.downloadmodal').on('click', function(e){
 				  var guid = $(this).attr('data-guid');
-				  $('#dtxt').attr('href','download.php?guid='+guid+'&type=txt');
+				  $('#dsrc').attr('href','download.php?guid='+guid+'&type=src');
 				  $('#djson').attr('href','download.php?guid='+guid+'&type=json');
 				  $('#dttl').attr('href','download.php?guid='+guid+'&type=ttl');
 				  $('#downloadModal').modal('show');

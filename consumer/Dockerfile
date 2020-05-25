@@ -10,5 +10,6 @@ RUN chmod a+x /*.sh
 
 RUN git clone https://github.com/netwerk-digitaal-erfgoed/MDWS-JSON-to-Turtle.git && cd MDWS-JSON-to-Turtle ; npm install
 RUN git clone https://github.com/netwerk-digitaal-erfgoed/MDWS-to-JSON.git && cd MDWS-to-JSON ; npm install
+RUN git clone https://github.com/hetutrechtsarchief/MF-Export-XML-to-JSON.git && cd MF-Export-XML-to-JSON ; npm install
 
 CMD ["/startup.sh"]

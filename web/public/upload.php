@@ -22,19 +22,19 @@ if ($_FILES["file"]["size"]>0) {
 				$list=unzip($_FILES['file']['tmp_name'],$tmpdir);
 				for($i = 0; $i < sizeof($list); $i++) {
 					$ext = strtolower(substr($list[$i],-4));
-					if ($ext==".txt") {
+					if ($ext==".txt" || $ext==".xml") {
 						$guid=GUID();
-						rename($tmpdir.$list[$i],UPLOAD_DIR.$guid.".txt");
+						rename($tmpdir.$list[$i],UPLOAD_DIR.$guid.$ext);
 						fInsertDataset($guid,$list[$i]);
 						fAddToQueue($guid,$list[$i]);
-						error_log("INFO: file $list[$i] from uploaded $uploadedfile as ".UPLOAD_DIR.$guid.".txt");
+						error_log("INFO: file $list[$i] from uploaded $uploadedfile as ".UPLOAD_DIR.$guid.$ext);
 					}
 				}
 				deleteDirectory($tmpdir);
-			} else if ($ext==".txt") {
+			} else if ($ext==".txt" || $ext==".xml") {
 				$guid=GUID();
-				if (move_uploaded_file($_FILES['file']['tmp_name'], UPLOAD_DIR.$guid.".txt")) {
-					error_log("INFO: file uploaded ".UPLOAD_DIR.$guid.".txt");
+				if (move_uploaded_file($_FILES['file']['tmp_name'], UPLOAD_DIR.$guid.$ext)) {
+					error_log("INFO: file uploaded ".UPLOAD_DIR.$guid.$ext);
 					fInsertDataset($guid,$uploadedfile);
 					fAddToQueue($guid,$uploadedfile);
 				} else {

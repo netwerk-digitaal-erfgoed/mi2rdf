@@ -10,9 +10,22 @@ echo "Starting with guid=$guid and graphname=$graphname"
 mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD -e "UPDATE datasets SET state='converting' WHERE guid='$guid'"
 
 # Do conversion magic 
-cd /MDWS-to-JSON
-echo "MDWS-to-JSON"
-node ./index.js /filestore/$guid.txt > /filestore/$guid.json 2> /filestore/$guid.json.err
+
+if [ -e /filestore/$guid.txt ]; do
+	cd /MDWS-to-JSON
+	echo "MDWS-to-JSON"
+	node ./index.js /filestore/$guid.txt > /filestore/$guid.json 2> /filestore/$guid.json.err
+else
+	if [ -e /filestore/$guid.xml ]; do
+		cd /MF-Export-XML-to-JSON
+		echo "MF-Export-XML-to-JSON"
+		node ./index.js /filestore/$guid.xml > /filestore/$guid.json 2> /filestore/$guid.json.err
+	else
+		echo "/filestore/$guid.txt or /filestore/$guid.xml could not be found" > /filestore/$guid.json.err
+		exit;
+	fi
+fi
+
 echo "MDWS-JSON-to-Turtle"
 cd /MDWS-JSON-to-Turtle
 node ./index.js /filestore/$guid.json > /filestore/$guid.ttl 2> /filestore/$guid.ttl.err

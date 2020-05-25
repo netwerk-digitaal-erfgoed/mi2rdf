@@ -23,7 +23,7 @@
                 </a>
             </div>
             <div class="navbar-title">
-                <span  data-toggle="tooltip" data-placement="right" data-html="true" title="<b>Gebruikt componenten</b>:<br>MDWS-JSON-to-Turtle versie <?= file_get_contents("/filestore/MDWS-JSON-to-Turtle.dat") ?><br>MDWS-to-JSON <?= file_get_contents("/filestore/MDWS-to-JSON.dat") ?>">MI2RDF <?= $_SERVER['ASSETS_CACHEBUSTER'] ?></span>
+                <span  data-toggle="tooltip" data-placement="right" data-html="true" title="<b>Gebruikte componenten</b>:<br>MDWS-JSON-to-Turtle versie <?= file_get_contents("/filestore/MDWS-JSON-to-Turtle.dat") ?><br>MF-Export-XML-to-JSON versie <?= file_get_contents("/filestore/MF-Export-XML-to-JSON.dat") ?><br>MDWS-to-JSON versie <?= file_get_contents("/filestore/MDWS-to-JSON.dat") ?>">MI2RDF <?= $_SERVER['ASSETS_CACHEBUSTER'] ?></span>
             </div>
         </div>
     </nav>
@@ -39,7 +39,7 @@
             <div class="col sink storyBanner">
 				<div id="uploadprogress"></div>
 				<div id="drop-area2">
-					<p>Sleep hier &eacute;&eacute;n of meerdere MDWS Internet bestanden heen of klik op onderstaande knop om bestanden te selecteren.</p>
+					<p>Sleep hier MDWS Internet (txt) of MF Export (xml) bestanden heen of klik op onderstaande knop om bestanden te selecteren.</p>
 					<form class="my-form">
 						<input type="file" multiple id="fileElem" accept=".txt,.zip" onchange="handleFiles(this.files)">
 						<label data-toggle="tooltip" data-placement="bottom" title="Maximale grootte per bestand is 500MB. De .txt bestanden kunnen ook gecomprimeerd en/of gebundeld worden in een .zip bestand." class="btn btn-block btn-label" for="fileElem">Selecteer bestand(en)</label>
@@ -246,7 +246,7 @@
 		  </div>
 		  <div class="modal-body">
 		  <ul>
-		  <li><a id="dtxt" href="#">Tekst bestand</a></li>
+		  <li><a id="dsrc" href="#">Bron bestand</a></li>
 		  <li><a id="djson" href="#">JSON bestand</a></li>
 		  <li><a id="dttl"  href="#">Turtle bestand</a></li>
 		  </ul>
