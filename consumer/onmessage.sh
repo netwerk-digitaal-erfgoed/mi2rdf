@@ -11,12 +11,12 @@ mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD -e "UP
 
 # Do conversion magic 
 
-if [ -e /filestore/$guid.txt ]; do
+if [ -e "/filestore/$guid.txt" ]; then
 	cd /MDWS-to-JSON
 	echo "MDWS-to-JSON"
 	node ./index.js /filestore/$guid.txt > /filestore/$guid.json 2> /filestore/$guid.json.err
 else
-	if [ -e /filestore/$guid.xml ]; do
+	if [ -e "/filestore/$guid.xml" ]; then
 		cd /MF-Export-XML-to-JSON
 		echo "MF-Export-XML-to-JSON"
 		node ./index.js /filestore/$guid.xml > /filestore/$guid.json 2> /filestore/$guid.json.err
