@@ -9,6 +9,11 @@ set_time_limit(0);
 if (!is_dir(UPLOAD_DIR)) {
 	mkdir(UPLOAD_DIR);
 }
+
+$organisation_id=0;
+if (isset($_SESSION["organisation_id"])) {
+	$organisation_id=$_SESSION["organisation_id"];
+}
 				
 if ($_FILES["file"]["size"]>0) {
 	
@@ -25,8 +30,8 @@ if ($_FILES["file"]["size"]>0) {
 					if ($ext==".txt" || $ext==".xml") {
 						$guid=GUID();
 						rename($tmpdir.$list[$i],UPLOAD_DIR.$guid.$ext);
-						fInsertDataset($guid,$list[$i]);
-						fAddToQueue($guid,$list[$i]);
+						fInsertDataset($guid,$list[$i],"uploaded",$organisation_id);
+						fAddToQueue($guid,$list[$i],$organisation_id);
 						error_log("INFO: file $list[$i] from uploaded $uploadedfile as ".UPLOAD_DIR.$guid.$ext);
 					}
 				}
@@ -35,8 +40,8 @@ if ($_FILES["file"]["size"]>0) {
 				$guid=GUID();
 				if (move_uploaded_file($_FILES['file']['tmp_name'], UPLOAD_DIR.$guid.$ext)) {
 					error_log("INFO: file uploaded ".UPLOAD_DIR.$guid.$ext);
-					fInsertDataset($guid,$uploadedfile);
-					fAddToQueue($guid,$uploadedfile);
+					fInsertDataset($guid,$uploadedfile,"uploaded",$organisation_id);
+					fAddToQueue($guid,$uploadedfile,$organisation_id);
 				} else {
 					error_log("WARN: Possible file upload attack $uploadedfile!");
 				}

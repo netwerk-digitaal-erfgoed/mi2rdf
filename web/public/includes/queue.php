@@ -4,10 +4,10 @@ require_once '/var/www/html/vendor/autoload.php';
 use PhpAmqpLib\Connection\AMQPConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-function fAddToQueue($guid,$filename) {	
+function fAddToQueue($guid,$filename,$organisation_id) {	
 	error_log("INFO: fAddToQueue($guid,$filename)");
 	
-	$content=$guid."|".preg_replace('/[^a-z0-9_\-]/i','',preg_replace('/\.txt$/i','',$filename));
+	$content=$guid."|".$organisation_id."|".preg_replace('/[^a-z0-9_\-]/i','',preg_replace('/\.txt$/i','',$filename));
 	$connection = new AMQPConnection(RABBIT_HOST, RABBIT_PORT, RABBIT_USER, RABBIT_PASS);
 	$channel = $connection->channel();
 	$channel->queue_declare(RABBIT_QUEUE_NAME, true, false, false, false);

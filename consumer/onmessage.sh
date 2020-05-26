@@ -4,17 +4,31 @@ RANDOM=$$
 IFS='|'
 read -ra ARR
 guid=${ARR[0]}
-graphname=${ARR[1]}"-"$RANDOM
+orgid=${ARR[1]}
+graphname=${ARR[2]}"-"$RANDOM
 
-echo "Starting with guid=$guid and graphname=$graphname"
+echo "Starting with guid=$guid | graphname=$graphname | orgid=$orgid"
 mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD -e "UPDATE datasets SET state='converting' WHERE guid='$guid'"
 
 # Do conversion magic 
 
 if [ -e "/filestore/$guid.txt" ]; then
-	cd /MDWS-to-JSON
-	echo "MDWS-to-JSON"
-	node ./index.js /filestore/$guid.txt > /filestore/$guid.json 2> /filestore/$guid.json.err
+	firstchar=$(head -c 1 /filestore/$guid.txt)
+	if [ "$firstchar" = "%" ]; then
+		cd /MDWS-to-JSON
+		echo "MDWS-to-JSON"
+		node ./index.js /filestore/$guid.txt > /filestore/$guid.json 2> /filestore/$guid.json.err
+	else 
+		# XML bestand vermomd als een .txt bestand
+		if [ "$firstchar" = "<" ]; then
+			cd /MF-Export-XML-to-JSON
+			echo "MF-Export-XML-to-JSON"
+			node ./index.js /filestore/$guid.txt > /filestore/$guid.json 2> /filestore/$guid.json.err
+		else
+			echo "/filestore/$guid.txt onverwachte inhoud (eerste karakter=$firstchar)"  > /filestore/$guid.json.err
+			exit;
+		fi
+	fi
 else
 	if [ -e "/filestore/$guid.xml" ]; then
 		cd /MF-Export-XML-to-JSON
@@ -26,14 +40,21 @@ else
 	fi
 fi
 
-echo "MDWS-JSON-to-Turtle"
+NAMESPACE=`mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD  -s -N -e "SELECT namespace FROM organisations WHERE id ='$orgid'";`
+
+echo "MDWS-JSON-to-Turtle (with namespace $NAMESPACE)"
 cd /MDWS-JSON-to-Turtle
-node ./index.js /filestore/$guid.json > /filestore/$guid.ttl 2> /filestore/$guid.ttl.err
+node ./index.js /filestore/$guid.json $NAMESPACE > /filestore/$guid.ttl 2> /filestore/$guid.ttl.err
 
 if [ -e "/filestore/$guid.ttl" ]; then
 	mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD -e "UPDATE datasets SET state='converted',converted=NOW() WHERE guid='$guid'"
 
 	echo "$guid converted"
+
+	TRIPLY_TOKEN=`mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD  -s -N -e "SELECT triply_token FROM organisations WHERE id ='$orgid'";`
+	TRIPLY_USER=`mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD  -s -N -e "SELECT triply_user FROM organisations WHERE id ='$orgid'";`
+	TRIPLY_DATASET=`mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD  -s -N -e "SELECT triply_dataset FROM organisations WHERE id ='$orgid'";`
+
 
 	if [ "" != "$TRIPLY_TOKEN" ]; then
 		JSON="/filestore/"$RANDOM".json"

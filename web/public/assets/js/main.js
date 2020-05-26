@@ -123,7 +123,11 @@
 							bUnconverted = 1;
 							listDiv += '<br>&nbsp;&raquo; <span class="converting">To Triply</span>';
 						} else {
-							listDiv += '<a class="lstbtn" data-toggle="tooltip" data-placement="top" title="Bekijk deze dataset als graph" target="triply" href="https://data.netwerkdigitaalerfgoed.nl/MI2RDF/mi2rdf/table?graph=' + jsonResponse[i].graph_uri + '"><img height="24" src="assets/imgs/cloud.svg"></a>';
+							if (jsonResponse[i].graph_uri != "") {
+								listDiv += '<a class="lstbtn" data-toggle="tooltip" data-placement="top" title="Bekijk deze dataset als graph" target="triply" href="https://data.netwerkdigitaalerfgoed.nl'+triply_user+'/'+triply_dataset+'/table?graph=' + jsonResponse[i].graph_uri + '"><img height="24" src="assets/imgs/cloud.svg"></a>';
+							} else {
+								listDiv += '<span class="lstbtn" style="opacity:0.4" data-toggle="tooltip" data-placement="top" title="Er is geen (link naar een) graph beschikbaar."><img height="24" src="assets/imgs/cloud.svg"></span>';
+							}
 						}
 					} else {
 						listDiv += '<br>&nbsp;&raquo; <span class="' + jsonResponse[i].state + '">'

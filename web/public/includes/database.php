@@ -1,6 +1,6 @@
 <?php
 
-function fInsertDataset($guid,$org_name,$state="uploaded") {
+function fInsertDataset($guid,$org_name,$state="uploaded",$organisation_id) {
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATA);
 
 	if ($mysqli->connect_error) {
@@ -8,12 +8,28 @@ function fInsertDataset($guid,$org_name,$state="uploaded") {
 		die("ERROR: Connection failed: " . $mysqli->connect_error);
 	} 
 
-	$sql = "INSERT INTO datasets(guid,org_name,state) VALUES (?,?,?)";
+	$sql = "INSERT INTO datasets(guid,org_name,state,organisation_id) VALUES (?,?,?,?)";
 	$stmt = $mysqli->prepare($sql);
-	$stmt->bind_param("sss",$guid,$org_name,$state);
+	$stmt->bind_param("ssss",$guid,$org_name,$state,$organisation_id);
 	$stmt->execute();
 	$mysqli->close();
 }
+
+function fUpdateOrganisation($organisation_id,$namespace,$tuser,$ttoken,$tdataset) {
+	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATA);
+
+	if ($mysqli->connect_error) {
+		error_log("ERROR: Connection failed: " . $mysqli->connect_error);
+		die("ERROR: Connection failed: " . $mysqli->connect_error);
+	} 
+
+	$sql = "UPDATE organisations SET namespace=?, triply_user=?, triply_token=?, triply_dataset=? WHERE id=?";
+	$stmt = $mysqli->prepare($sql);
+	$stmt->bind_param("ssssd",$namespace,$tuser,$ttoken,$tdataset,$organisation_id);
+	$stmt->execute();
+	$mysqli->close();
+}
+
 
 function fDeleteDataset($guid) {
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATA);
@@ -50,16 +66,21 @@ function arrGetDataset($guid) {
 	return $dataset;
 }
 
-function arrGetDatasets($last=5) {
+function arrGetDatasets($organisation_id, $last=5) {
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATA);
 	if ($mysqli->connect_errno) {
 		die("ERROR: Connection failed: " . $mysqli->connect_error);
 	} 
 	
-	$sql = "SELECT * FROM datasets ORDER BY id DESC LIMIT 0,".$last;
+	$sql = "SELECT * FROM datasets WHERE organisation_id=? ORDER BY id DESC LIMIT 0,".$last;
+	$stmt = $mysqli->prepare($sql);
+	if ( false===$stmt ) { error_log('FAIL: prepare() failed: ' . $mysqli->error); }
+	$stmt->bind_param("d",$organisation_id);
+	$stmt->execute();
+	
 	$datasets=array();	
-	if (!$result = $mysqli->query($sql)) {
-		error_log("ERORR: " . $sql . "" . mysqli_error($mysqli));
+	if (!$result = $stmt->get_result()) {
+		error_log("ERROR: " . $sql . "" . mysqli_error($mysqli));
 	} else {	
 		while ($dataset = $result->fetch_assoc()) {
 			array_push($datasets,$dataset);
@@ -68,4 +89,48 @@ function arrGetDatasets($last=5) {
 	}
 	$mysqli->close();
 	return $datasets;
+}
+
+function nrLoginUser($username,$password_hash) {
+	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATA);
+	if ($mysqli->connect_errno) {
+		die("ERROR: Connection failed: " . $mysqli->connect_error);
+	} 
+	
+	$sql="SELECT organisation_id FROM users WHERE username=? AND password_hash=?";
+	$stmt = $mysqli->prepare($sql);
+	$stmt->bind_param("ss",$username,$password_hash);
+	$stmt->execute();
+
+	if (!$result = $stmt->get_result()) {
+		error_log("Error: " . $sql . "" . mysqli_error($mysqli));
+	} else {	
+		if ($user = $result->fetch_assoc()) {
+			$org_id=$user['organisation_id'];
+		}
+		$result->free();
+	}
+	$mysqli->close();
+	return $org_id;	
+}
+
+function arrGetOrganisationInfo($org_id) {
+	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATA);
+	if ($mysqli->connect_errno) {
+		die("ERROR: Connection failed: " . $mysqli->connect_error);
+	} 
+	
+	$sql = "SELECT * FROM organisations WHERE id=?";
+	$stmt = $mysqli->prepare($sql);
+	$stmt->bind_param("s",$org_id);
+	$stmt->execute();
+
+	if (!$result = $stmt->get_result()) {
+		error_log("Error: " . $sql . "" . mysqli_error($mysqli));
+	} else {	
+		$organisation = $result->fetch_assoc();
+		$result->free();
+	}
+	$mysqli->close();
+	return $organisation;
 }

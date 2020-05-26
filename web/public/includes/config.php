@@ -13,3 +13,7 @@ define('RABBIT_USER', 'mi2rdf'); # getenv('RABBITMQ_DEFAULT_USER')
 define('RABBIT_PASS', 'mi2rdf'); # getenv('RABBITMQ_DEFAULT_PASS')
 
 define("RABBIT_QUEUE_NAME", "mi2rdf");
+
+define("MAX_LIST", 200);
+
+session_start();
