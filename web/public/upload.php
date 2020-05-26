@@ -64,7 +64,7 @@ function unzip($src_file, $dest_dir) {
 	$list=array();
 	$handler = opendir($dest_dir);
 	while( $file = readdir( $handler ) ) {
-		if (substr($file,0,1)!="." && $file!=".." && substr($file,-4)==".txt" && substr($file,-4)==".xml") {
+		if (substr($file,0,1)!="." && $file!=".." && (substr($file,-4)==".txt" || substr($file,-4)==".xml")) {
 			array_push($list,$file);
 		}
 	}
