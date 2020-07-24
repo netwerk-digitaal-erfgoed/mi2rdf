@@ -1,7 +1,7 @@
 USE mi2rdf;
 
 CREATE TABLE `datasets` (
-  `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25,
+  `id` INT NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25,
   `guid` varchar(40) NOT NULL,
   `org_name` varchar(250) NOT NULL,
   `state` varchar(10) NOT NULL,
@@ -28,7 +28,7 @@ ALTER TABLE `organisations`
   ADD PRIMARY KEY (`id`);
   
 CREATE TABLE `users` ( 
-  `id` INT NOT NULL AUTO_INCREMENT, 
+  `id` int(11) NOT NULL AUTO_INCREMENT, 
   `username` VARCHAR(100) NOT NULL,
   `password_hash` VARCHAR(100) NOT NULL,
   `organisation_id` INT NOT NULL
@@ -38,5 +38,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE (`username`);
 
+CREATE TABLE `id2guid` ( 
+	`id` int(11) NOT NULL, 
+	`adt_id` INT NOT NULL, 
+	`GUID` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1; 
+
+ALTER TABLE `id2guid` ADD UNIQUE( `id`, `adt_id`);
 
 INSERT INTO `organisations` VALUES (0,"MI2RDF","https://www.archive.io/","","MI2RDF","mi2rdf");

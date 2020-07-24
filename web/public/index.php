@@ -42,6 +42,7 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Inloggen</button>
 		<?php } else { ?>
 		<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#configModal">Instellingen</button>
+		<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#id2guidModal">ID-GUID tabel</button>
 		<a href="uitloggen.php" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Ingelogd als <?php echo $_SESSION["user"]." (".htmlentities($_SESSION["organisation"]["name"]).")" ?>">Uitloggen</a>
 		<?php } ?>
 		</div>
@@ -336,12 +337,36 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
 		  <span class="btn btn-sm btn-warning float-right" data-html="true" data-toggle="tooltip" data-placement="bottom" data-original-title="<p>mi2rdf zal de triples opslaan in Triply, in een graph binnen een specifieke dataset van je organisatie.</p><ul><li>Login op data.netwerkdigitaalerfgoed.nl (Triply via NDE);</li><li>Klik je gebruikersnaam, rechtboven, en kies <b>My account</b>;</li><li>Klik op je organisatie (onder <b>Organizations</b>);</li><li>Klik op <b>Add dataset</b>;</li><li>Vul een 'Dataset name' in (bijv. mi2rdf), kopieer deze waarde en plak het hier bij de Instellingen in het veld <b>Triply Dataset</b>;</li><li>Vul eventueel de <b>Display name</b> en <b>Description</b> in, kies de gewenste zichtbaarheid (<b>Public</b> is een goede waarde, het gaat immers om open data).</li></ul>">?</span>
 		  <input class="form-control" type="text" value="<?= htmlentities($_SESSION["organisation"]["triply_dataset"],ENT_QUOTES) ?>" id="tdataset" name="tdataset" required>
 		
-		 
 		  <br><input type="submit" class="btn btn-primary" value="Opslaan">
 		  </form>
 		  </div>
 		</div>
 	  </div>
+	</div>
+	<div class="modal fade" id="id2guidModal" tabindex="-1" role="dialog" aria-labelledby="id2guidModalTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="id2guidModalTitle">ID-GUID tabel</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Sluiten"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body" id="id2guidModalBody">
+					<form action="upload-csv.php" method="post" enctype="multipart/form-data">
+						<p>De ID-GUID tabel voor <strong><?= htmlentities($_SESSION["organisation"]["name"]) ?></strong> bevat <?=  nrID2GUIDtabel($organisation_id) ?> regels. Deze waarden wordt gebruikt bij de vertaling van ID's naar GUID's in de te genereren linked data.</p>
+						<hr>
+						<p>De tabel kan gevuld worden door het uploaden van een CSV bestand. Elke regel moet een ID en een GUID bevatten, gescheiden door een komma. Een GUID moet bestaan uit 32 tekens (0..9, A..F, geen koppeltekens). Voorbeeld:</p>
+<pre>2853004,0D8F45A06E7542C7A7E563806DD83394
+5651440,210B29A49D3B81CB44A430B64F90A6DE
+5651441,A3EDC9ED4F854135885119BAEA30E93F
+6086160,AC22AA21DBAA41E38B4A50C498D91D9E
+6086161,D4D9772AD1264345BBF591A7C1BAD0CB</pre>
+						<label for="namespace">Nieuw CSV bestand</label>
+						<input class="form-control" type="file" id="file" name="file" required>
+						<br><input type="submit" class="btn btn-primary" value="Uploaden">
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
 <?php } ?>
 	<script>

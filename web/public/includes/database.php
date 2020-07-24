@@ -134,3 +134,28 @@ function arrGetOrganisationInfo($org_id) {
 	$mysqli->close();
 	return $organisation;
 }
+
+
+function nrID2GUIDtabel($organisation_id) {
+	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATA);
+	if ($mysqli->connect_errno) {
+		die("ERROR: Connection failed: " . $mysqli->connect_error);
+	} 
+	
+	$sql="SELECT COUNT(*) AS aantal FROM id2guid WHERE adt_id=?";
+	$stmt = $mysqli->prepare($sql);
+	$stmt->bind_param("i",$organisation_id);
+	$stmt->execute();
+
+	$aantal=0;
+	if (!$result = $stmt->get_result()) {
+		error_log("Error: " . $sql . "" . mysqli_error($mysqli));
+	} else {	
+		if ($res = $result->fetch_assoc()) {
+			$aantal=$res['aantal'];
+		}
+		$result->free();
+	}
+	$mysqli->close();
+	return $aantal;	
+}
