@@ -63,7 +63,6 @@ function GUID() {
 }
 	
 function unzip($src_file, $dest_dir) {
-	error_log("INFO: unzip -j -o $src_file \"*.*\" -d $dest_dir");
 	exec("unzip -j -o $src_file \"*.*\" -d $dest_dir");
 
 	$list=array();

@@ -354,14 +354,14 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
 					<form action="upload-csv.php" method="post" enctype="multipart/form-data">
 						<p>De ID-GUID tabel voor <strong><?= htmlentities($_SESSION["organisation"]["name"]) ?></strong> bevat <?=  nrID2GUIDtabel($organisation_id) ?> regels. Deze waarden wordt gebruikt bij de vertaling van ID's naar GUID's in de te genereren linked data.</p>
 						<hr>
-						<p>De tabel kan gevuld worden door het uploaden van een CSV bestand. Elke regel moet een ID en een GUID bevatten, gescheiden door een komma. Een GUID moet bestaan uit 32 tekens (0..9, A..F, geen koppeltekens). Voorbeeld:</p>
+						<p>De tabel kan gevuld worden door het uploaden van een CSV bestand (met als extensie .csv). Het CSV bestand kan ook gecomprimeerd worden en als .zip aangeboden worden. Elke regel in het CSV bestand moet een ID en een GUID bevatten, gescheiden door een komma. Een GUID moet bestaan uit 32 tekens (0..9, A..F, geen koppeltekens). Bijvoorbeeld:</p>
 <pre>2853004,0D8F45A06E7542C7A7E563806DD83394
 5651440,210B29A49D3B81CB44A430B64F90A6DE
 5651441,A3EDC9ED4F854135885119BAEA30E93F
 6086160,AC22AA21DBAA41E38B4A50C498D91D9E
 6086161,D4D9772AD1264345BBF591A7C1BAD0CB</pre>
 						<label for="namespace">Nieuw CSV bestand</label>
-						<input class="form-control" type="file" id="file" name="file" required>
+						<input class="form-control" type="file" accept=".csv,.zip" id="file" name="file" required>
 						<br><input type="submit" class="btn btn-primary" value="Uploaden">
 					</form>
 				</div>
