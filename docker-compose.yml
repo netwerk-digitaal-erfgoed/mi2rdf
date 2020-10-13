@@ -9,7 +9,7 @@ services:
         restart: always
         labels:
             - "traefik.docker.network=traefik"
-            - "traefik.frontend.rule=Host:demo.netwerkdigitaalerfgoed.nl;PathPrefix:/mi2rdf;PathPrefixStrip:/mi2rdf"
+            - "traefik.frontend.rule=Host:mi2rdf.netwerkdigitaalerfgoed.nl;PathPrefix:/;PathPrefixStrip:/"
             - "traefik.port=80"
         networks:
             - traefik
