@@ -34,7 +34,7 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
                 </a>
             </div>
             <div class="navbar-title">
-                <span data-toggle="tooltip" data-placement="right" data-html="true" title="<b>Gebruikte componenten</b>:<br>MDWS-JSON-to-Turtle versie <?= file_get_contents("/filestore/MDWS-JSON-to-Turtle.dat") ?><br>MF-Export-XML-to-JSON versie <?= file_get_contents("/filestore/MF-Export-XML-to-JSON.dat") ?><br>MDWS-to-JSON versie <?= file_get_contents("/filestore/MDWS-to-JSON.dat") ?>">MI2RDF <?= $_SERVER['ASSETS_CACHEBUSTER'] ?></span>
+                <span data-toggle="tooltip" data-placement="right" data-html="true" title="<b>Gebruikte componenten:</b><br>MFXML-to-JSONLD versie <?= file_get_contents("/filestore/MFXML-to-JSONLD.dat") ?>">MI2RDF <?= $_SERVER['ASSETS_CACHEBUSTER'] ?></span>
             </div>
         </div>
 		<div style="float:right">
@@ -42,7 +42,8 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Inloggen</button>
 		<?php } else { ?>
 		<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#configModal">Instellingen</button>
-		<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#id2guidModal">ID-GUID tabel</button>
+		<!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#id2guidModal">ID-GUID tabel</button> -->
+		<a href="kladblok/" target="mi2rdf_kladblok" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Eenvoudig kladblok om triples in Triply te krijgen">Triple Kladblok</a>
 		<a href="uitloggen.php" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Ingelogd als <?php echo $_SESSION["user"]." (".htmlentities($_SESSION["organisation"]["name"]).")" ?>">Uitloggen</a>
 		<?php } ?>
 		</div>
@@ -51,7 +52,7 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
         <div class="row">
             <div class="col headcol">
                 <h1>MI2RDF<?php if (isset($_SESSION["user"])) { echo ' - '.htmlentities($_SESSION["organisation"]["name"]); } ?></h1>
-                <p>LODwrapper om MDWS Internet bestanden te converteren naar triples.</p>
+                <p>LODwrapper om MAIS-Flexis export bestanden te converteren naar triples.</p>
             </div>
         </div>
 
@@ -59,7 +60,7 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
             <div class="col sink storyBanner">
 				<div id="uploadprogress"></div>
 				<div id="drop-area2">
-					<p>Sleep hier MDWS Internet (txt) of MF Export (xml) bestanden heen of klik op onderstaande knop om bestanden te selecteren.</p>
+					<p>Sleep hier MAIS-Flexis export bestanden heen of klik op onderstaande knop om bestanden te selecteren.</p>
 					<form class="my-form">
 						<input type="file" multiple id="fileElem" accept=".txt,.zip" onchange="handleFiles(this.files)">
 						<label data-toggle="tooltip" data-placement="bottom" title="Maximale grootte per bestand is 500MB. De bestanden kunnen ook gecomprimeerd en/of gebundeld worden in een .zip bestand." class="btn btn-block btn-label" for="fileElem">Selecteer bestand(en)</label>
