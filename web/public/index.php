@@ -42,9 +42,10 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Inloggen</button>
 		<?php } else { ?>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#configModal">Instellingen</button>&nbsp;
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#skipfieldsModal">Te Negeren Velden</button>&nbsp;
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#skipfieldsModal">Te negeren velden</button>&nbsp;
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contextModal">JSON context</button>&nbsp;
 		<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#id2guidModal">ID-GUID tabel</button>&nbsp; -->
-		<a href="kladblok/" target="mi2rdf_kladblok" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Eenvoudig kladblok om triples in Triply te krijgen">Triple Kladblok</a>&nbsp;
+		<a href="kladblok/" target="mi2rdf_kladblok" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Eenvoudig kladblok om triples in Triply te krijgen">Triple kladblok</a>&nbsp;
 		<a href="uitloggen.php" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Ingelogd als <?php echo $_SESSION["user"]." (".htmlentities($_SESSION["organisation"]["name"]).")" ?>">Uitloggen</a>
 		<?php } ?>
 		</div>
@@ -372,6 +373,23 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
 		</div>
 	</div>
 */ ?>
+	<div class="modal fade" id="contextModal" tabindex="-1" role="dialog" aria-labelledby="contextModalTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="contextModalTitle">JSON context</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Sluiten"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body" id="contextModalBody">
+					<form action="upload-context.php" method="post" enctype="multipart/form-data">
+						<p>De mapping van de MAIS velden naar properties ligt vast in een JSON context. <strong>Voorzichtig hiermee!</strong></p>
+						<p><textarea name="context" style="width:100%" rows="10"><?= htmlentities(file_get_contents("/filestore/".$organisation_id."/context.json")) ?></textarea>
+						<br><input type="submit" class="btn btn-primary" value="Opslaan">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="modal fade" id="skipfieldsModal" tabindex="-1" role="dialog" aria-labelledby="skipfieldsModalTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-scrollable" role="document">
 			<div class="modal-content">

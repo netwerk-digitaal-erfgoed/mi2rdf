@@ -56,7 +56,7 @@ if (!empty($_SESSION["organisation"]["triply_token"]) && !empty($_SESSION["organ
     <div class="container">
         <div class="row">
             <div class="col headcol">
-                <h1>MI2RDF - Triple Kladblok - <?= htmlentities($_SESSION["organisation"]["name"]); ?></h1>
+                <h1>MI2RDF - Triple kladblok - <?= htmlentities($_SESSION["organisation"]["name"]); ?></h1>
             </div>
         </div>
         <div class="row">
