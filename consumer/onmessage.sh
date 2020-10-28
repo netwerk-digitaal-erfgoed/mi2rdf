@@ -42,6 +42,10 @@ if [ "$graphname" = "kladblok" ]; then
 			MAXTRIES=$((MAXTRIES-1))
 	done
 
+	if [ "$STATUS" == "error" ]; then
+		mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD -e "UPDATE datasets SET state='error' WHERE guid='$guid'"
+	fi
+
 	if [ "$STATUS" == "finished" ]; then
 			graph=`grep -o -E https://data.netwerkdigitaalerfgoed.nl/$TRIPLY_USER/$TRIPLY_DATASET/graphs/[a-z0-9\-]+ $JSON`
 
@@ -114,8 +118,10 @@ else
 
 			if [ "$STATUS" == "finished" ]; then
 				graph=`grep -o -E https://data.netwerkdigitaalerfgoed.nl/$TRIPLY_USER/$TRIPLY_DATASET/graphs/[a-z0-9\-]+ $JSON`
-				echo "curl -s \"$API/datasets/$TRIPLY_USER/$TRIPLY_DATASET/graphs\" | grep -Pzo '\"graphName\": \"'$graph'\",\n\s*\"id\": \"(.*?)\"' | tail -1 | sed 's/\s*\"id\": \"//' | sed 's/\"//'"
-				graphId=`curl -s "$API/datasets/$TRIPLY_USER/$TRIPLY_DATASET/graphs" | grep -Pzo '"graphName": "'$graph'",\n\s*"id": "(.*?)"' | tail -1 | sed 's/\s*"id": "//' | sed 's/"//'`
+
+				curl -s --request GET -H 'Content-Type: application/json' -H "Authorization: Bearer $TRIPLY_TOKEN" "$API/datasets/$TRIPLY_USER/$TRIPLY_DATASET/graphs" > $JSON
+				cat $JSON
+				graphId=`grep -Pzo '"graphName": "'$graph'",\n\s*"id": "(.*?)"' $JSON | tail -1 | sed 's/\s*"id": "//' | sed 's/"//' | tr '\0' '\n'`
 
 				graphname+="-"$RANDOM
 
