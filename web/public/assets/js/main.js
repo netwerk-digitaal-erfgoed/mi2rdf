@@ -48,12 +48,11 @@
 		}
 	}
 
-
 	function uploadFile(file) {
 		var filelength = parseInt(file.name.length) - 3;
 		var fileext = file.name.substring(filelength, filelength + 3);
 		if (fileext.toLowerCase() != "txt" && fileext.toLowerCase() != "xml" && fileext.toLowerCase() != "zip") {
-			MsgBox("U kunt alleen een MAIS internet bestand (.txt) of MF export bestanden (.xml) of een of meer gecomprimeerde bestanden in één ZIP bestand uploaden.", "Foutmelding");
+			MsgBox("U kunt alleen een MAIS export bestand (.xml) of een of meer gecomprimeerde bestanden in één ZIP bestand uploaden.", "Foutmelding");
 			return;
 		}
 
@@ -138,7 +137,6 @@
 						bUnconverted = 1;
 					}
 					
-
 					listDiv += '</li>';
 				}
 				listDiv += '</ul>';

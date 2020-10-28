@@ -41,10 +41,11 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
 		<?php if (!isset($_SESSION["user"])) { ?>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Inloggen</button>
 		<?php } else { ?>
-		<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#configModal">Instellingen</button>
-		<!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#id2guidModal">ID-GUID tabel</button> -->
-		<a href="kladblok/" target="mi2rdf_kladblok" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Eenvoudig kladblok om triples in Triply te krijgen">Triple Kladblok</a>
-		<a href="uitloggen.php" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Ingelogd als <?php echo $_SESSION["user"]." (".htmlentities($_SESSION["organisation"]["name"]).")" ?>">Uitloggen</a>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#configModal">Instellingen</button>&nbsp;
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#skipfieldsModal">Te Negeren Velden</button>&nbsp;
+		<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#id2guidModal">ID-GUID tabel</button>&nbsp; -->
+		<a href="kladblok/" target="mi2rdf_kladblok" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Eenvoudig kladblok om triples in Triply te krijgen">Triple Kladblok</a>&nbsp;
+		<a href="uitloggen.php" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Ingelogd als <?php echo $_SESSION["user"]." (".htmlentities($_SESSION["organisation"]["name"]).")" ?>">Uitloggen</a>
 		<?php } ?>
 		</div>
     </nav>
@@ -344,6 +345,7 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
 		</div>
 	  </div>
 	</div>
+<?php /*
 	<div class="modal fade" id="id2guidModal" tabindex="-1" role="dialog" aria-labelledby="id2guidModalTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-scrollable" role="document">
 			<div class="modal-content">
@@ -364,6 +366,24 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
 						<label for="namespace">Nieuw CSV bestand</label>
 						<input class="form-control" type="file" accept=".csv,.zip" id="file" name="file" required>
 						<br><input type="submit" class="btn btn-primary" value="Uploaden">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+*/ ?>
+	<div class="modal fade" id="skipfieldsModal" tabindex="-1" role="dialog" aria-labelledby="skipfieldsModalTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="skipfieldsModalTitle">Te negeren velden</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Sluiten"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body" id="skipfieldsModalBody">
+					<form action="upload-skipfields.php" method="post" enctype="multipart/form-data">
+						<p>De inhoud van het MAIS export bestand wordt zo veel mogelijk omgezet naar triples. Sommige velden zijn niet nuttig of mogen niet omgezet worden en moeten dus genegeerd worden. In onderstaand veld kunnen de te negeren velden (1 per regel) opgegeven worden.</p>
+						<p><textarea name="skipfields" style="width:100%" rows="10"><?= htmlentities(file_get_contents("/filestore/".$organisation_id."/skipfields.csv")) ?></textarea>
+						<br><input type="submit" class="btn btn-primary" value="Opslaan">
 					</form>
 				</div>
 			</div>
