@@ -15,8 +15,8 @@ if (isset($_GET["guid"])) {
 			}
 		}
 		
-		// graph		
-		if (isset($_SESSION["organisation"]["triply_token"])) {
+		// graph niet standaard verwijderd (is niet de verwachting), mogelijk later wel in GUI opnemen, dan met db parameter aanroepen
+		if (isset($_SESSION["organisation"]["triply_token"]) && isset(_$GET["db"])) {	
 			
 			$dataset=arrGetDataset($guid);
 

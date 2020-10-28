@@ -113,7 +113,9 @@
 						listDiv += jsonResponse[i].org_name.substr(0,namecutoff-3)+'&hellip;';
 					}
 					listDiv += '</span>';
-					listDiv += '<a class="lstbtn" data-toggle="tooltip" data-placement="top" title="Verwijder deze dataset" href="#" onclick="deldataset(\'' + jsonResponse[i].guid + '\')"><img height="16" src="assets/imgs/trash.svg"></a>';
+					listDiv += '<a class="lstbtn" data-toggle="tooltip" data-placement="top" title="Verwijder deze dataset';
+					if (triply_user!="") { listDiv += ' (er wordt geen graph in Triply verwijderd)'; }
+					listDiv += '" href="#" onclick="deldataset(\'' + jsonResponse[i].guid + '\')"><img height="16" src="assets/imgs/trash.svg"></a>';
 					
 					listDiv += '<a class="lstbtn logmodal" data-toggle="tooltip" data-placement="top" title="Bekijk de logging" href="logging.php?guid=' + jsonResponse[i].guid + '"><img height="16" src="assets/imgs/logging.svg"></a>';
 					
