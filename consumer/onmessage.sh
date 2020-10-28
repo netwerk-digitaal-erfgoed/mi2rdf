@@ -5,7 +5,7 @@ IFS='|'
 read -ra ARR
 guid=${ARR[0]}
 orgid=${ARR[1]}
-graphname=${ARR[2]}"-"$RANDOM
+graphname=${ARR[2]}
 
 # 5 minuten
 MAXTRIES=300
@@ -14,13 +14,16 @@ TRIPLY_TOKEN=`mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_P
 TRIPLY_USER=`mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD  -s -N -e "SELECT triply_user FROM organisations WHERE id ='$orgid'";`
 TRIPLY_DATASET=`mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD  -s -N -e "SELECT triply_dataset FROM organisations WHERE id ='$orgid'";`
 
+NAMESPACE=`mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD  -s -N -e "SELECT namespace FROM organisations WHERE id ='$orgid'";`
+# https://www.archive.io/
+
 API="https://data.netwerkdigitaalerfgoed.nl/_api"
 
 JSON="/filestore/"$RANDOM".json"
 
 echo "Starting with guid=$guid | graphname=$graphname | orgid=$orgid"
 
-if [[ $graphname =~ "kladblok" ]; then
+if [ "$graphname" = "kladblok" ]; then
 
 	echo "Storing kladblok"
 
@@ -59,18 +62,14 @@ if [[ $graphname =~ "kladblok" ]; then
 	
 else
 
-	mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD -e "UPDATE datasets SET state='converting' WHERE guid='$guid'"
-
-	NAMESPACE=`mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD  -s -N -e "SELECT namespace FROM organisations WHERE id ='$orgid'";`
-	# https://www.archive.io/
-
-
 	# Do conversion magic 
+
+	mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD -e "UPDATE datasets SET state='converting' WHERE guid='$guid'"
 
 
 	cd /MFXML-to-JSONLD
 	echo "MFXML-to-JSONLD"
-	python mf2jsonld.py --xml /filestore/$guid.txt --adt_id $orgid --uribase "https://waterlandsarchief.nl/" --skipfields $orgid/skipfields.csv > /filestore/$guid.json  2> /filestore/$guid.json.err
+	python3 mf2jsonld.py --xml /filestore/$guid.txt --adt_id $orgid --uribase "https://waterlandsarchief.nl/" --skipfields $orgid/skipfields.csv > /filestore/$guid.json  2> /filestore/$guid.json.err
 	# --trefwoordsoorten
 	# --relatiesoorten
 
@@ -119,6 +118,8 @@ else
 				graph=`grep -o -E https://data.netwerkdigitaalerfgoed.nl/$TRIPLY_USER/$TRIPLY_DATASET/graphs/[a-z0-9\-]+ $JSON`
 				echo "curl -s \"$API/datasets/$TRIPLY_USER/$TRIPLY_DATASET/graphs\" | grep -Pzo '\"graphName\": \"'$graph'\",\n\s*\"id\": \"(.*?)\"' | tail -1 | sed 's/\s*\"id\": \"//' | sed 's/\"//'"
 				graphId=`curl -s "$API/datasets/$TRIPLY_USER/$TRIPLY_DATASET/graphs" | grep -Pzo '"graphName": "'$graph'",\n\s*"id": "(.*?)"' | tail -1 | sed 's/\s*"id": "//' | sed 's/"//'`
+
+				graphname+="-"$RANDOM
 
 				echo "Renaming graph $graphId from $graph to $graphname"
 				curl -s -X PATCH -H 'Content-Type: application/json' -H "Authorization: Bearer $TRIPLY_TOKEN"  --data-binary '{"graphName":"https://data.netwerkdigitaalerfgoed.nl/'$TRIPLY_USER'/'$TRIPLY_DATASET'/graphs/'$graphname'"}' "$API/datasets/$TRIPLY_USER/$TRIPLY_DATASET/graphs/$graphId" > $JSON
