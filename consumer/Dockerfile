@@ -22,9 +22,7 @@ RUN mkdir -p /filestore/2
 RUN mkdir -p /filestore/0
 # wl
 RUN mkdir -p /filestore/131
-RUN rm /filestore/131/* && wget https://raw.githubusercontent.com/hetutrechtsarchief/Waterlandsarchief/master/skipfields.csv?token=AAAY3PGPLH5ZFA76E47BYBS7UF5T2 -o /filestore/131/skipfields.csv
-RUN cp /filestore/131/* /filestore/39/
-RUN cp /filestore/131/* /filestore/2/
-RUN cp /filestore/131/* /filestore/0/
+RUN rm -f /filestore/131/* && wget https://raw.githubusercontent.com/hetutrechtsarchief/Waterlandsarchief/master/skipfields.csv?token=AAAY3PGPLH5ZFA76E47BYBS7UF5T2 -o /filestore/131/skipfields.csv
+RUN cp /filestore/131/* /filestore/39/ && cp /filestore/131/* /filestore/2/ && cp /filestore/131/* /filestore/0/
 
 CMD ["/startup.sh"]
