@@ -69,7 +69,7 @@ else
 
 	cd /MFXML-to-JSONLD
 	echo "MFXML-to-JSONLD"
-	python3 mf2jsonld.py --xml /filestore/$guid.txt --adt_id $orgid --uribase "https://waterlandsarchief.nl/" --skipfields $orgid/skipfields.csv > /filestore/$guid.json  2> /filestore/$guid.json.err
+	python3 mf2jsonld.py --xml /filestore/$guid.txt --adt_id $orgid --uribase "https://waterlandsarchief.nl/" --skipfields /filestore/$orgid/skipfields.csv > /filestore/$guid.json  2> /filestore/$guid.json.err
 	# --trefwoordsoorten
 	# --relatiesoorten
 
