@@ -143,9 +143,11 @@
 				bUpdateDatasetlist = bUnconverted;
 				if (bUpdateDatasetlist == 1) {
 					document.getElementById('datasetlist').classList.add("running");
+					$('#wachtverzachter').show();
 					myTimer = setTimeout(updateDatasetlist, 4000);
 				} else {
 					document.getElementById('datasetlist').classList.remove("running");
+					$('#wachtverzachter').hide();
 				}
 				document.getElementById('datasetlist').innerHTML = listDiv;
 				
