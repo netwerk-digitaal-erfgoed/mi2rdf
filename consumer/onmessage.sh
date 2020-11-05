@@ -72,10 +72,10 @@ else
 
 	cd /MFXML-to-JSONLD
 	echo "MFXML-to-JSONLD"
-	python3 mf2jsonld.py --xml /filestore/$guid.txt --adt_id $orgid --uribase "https://waterlandsarchief.nl/" --skipfields /filestore/$orgid/skipfields.csv  > /filestore/$orgid/$guid.json  2> /filestore/$guid.json.err
+	python3 mf2jsonld.py --xml /filestore/$guid.txt --adt_id $orgid --uribase "https://waterlandsarchief.nl/" --skipfields /filestore/$orgid/skipfields.csv  > /filestore/$guid.json  2> /filestore/$guid.json.err
 
 
-	node --max-old-space-size=8192 /usr/local/bin/jsonld normalize /filestore/$orgid/$guid.json > /filestore/$guid.nq 2> /filestore/$guid.ttl.err
+	node --max-old-space-size=8192 /usr/local/bin/jsonld normalize /filestore/$guid.json > /filestore/$guid.nq 2> /filestore/$guid.ttl.err
 
 	rapper -i nquads \
 	  -f 'xmlns:def="https://waterlandsarchief.nl/def/"' \
