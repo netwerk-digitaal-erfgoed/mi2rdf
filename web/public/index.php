@@ -42,9 +42,9 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Inloggen</button>
 		<?php } else { ?>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#configModal">Instellingen</button>&nbsp;
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#skipfieldsModal">Te negeren velden</button>&nbsp;
+		<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#skipfieldsModal">Te negeren velden</button>&nbsp;
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contextModal">JSON context</button>&nbsp;
-		<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#id2guidModal">ID-GUID tabel</button>&nbsp; -->
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#id2guidModal">ID-GUID tabel</button>&nbsp; -->
 		<a href="kladblok/" target="mi2rdf_kladblok" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Eenvoudig kladblok om triples in Triply te krijgen">Triple kladblok</a>&nbsp;
 		<a href="uitloggen.php" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Ingelogd als <?php echo $_SESSION["user"]." (".htmlentities($_SESSION["organisation"]["name"]).")" ?>">Uitloggen</a>
 		<?php } ?>
@@ -71,7 +71,7 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
 				</div>
 				<div id="midelbar">
 					<div id="koppelstuk"></div>
-	                <div class="baton-container">
+	                <div class="baton-container" id="wachtverzachter" style="display:none">
 						<div class="baton-0">
 							<div class="metronome">
 								<div class="baton"></div>
@@ -316,18 +316,38 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
 	</div>
 <?php } else { ?>
 	<div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="configModalTitle" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-scrollable" role="document">
+	  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
 		<div class="modal-content">
 		  <div class="modal-header">
 			<h5 class="modal-title" id="configModalTitle">Instellingen</h5>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Sluiten"><span aria-hidden="true">&times;</span></button>
 		  </div>
 		  <div class="modal-body" id="configModalBody">
-		  <form action="instellingen.php" method="post">
+		  
+		  
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="org-tab" data-toggle="tab" href="#org" role="tab" aria-controls="home" aria-selected="true">Organisatie</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="velden-tab" data-toggle="tab" href="#velden" role="tab" aria-controls="profile" aria-selected="false">Te negeren velden</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="context-tab" data-toggle="tab" href="#context" role="tab" aria-controls="contact" aria-selected="false">JSON context</a>
+  </li>
+<!--  <li class="nav-item">
+    <a class="nav-link" id="kladblok-tab" data-toggle="tab" href="#kladblok" role="tab" aria-controls="contact" aria-selected="false">Kladblok</a>
+  </li> -->
+</ul>
+<br>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="org" role="tabpanel" aria-labelledby="org-tab">
+  
+   <form action="instellingen.php" method="post">
 		  
 		  <p>Onderstaande instellingen zijn voor alle gebruikers die gekoppeld zijn aan <strong><?= htmlentities($_SESSION["organisation"]["name"]) ?></strong>.</p>
-		  <label for="namespace">Base URL</label>
-		   <span class="btn btn-sm btn-warning float-right" data-html="true" data-toggle="tooltip" data-placement="top" data-original-title="<p>mi2rdf zal deze <b>base URL</b> gebruiken als namespace voor de URI's van de triples.">?</span>
+		  <label for="namespace">Base URI</label>
+		   <span class="btn btn-sm btn-warning float-right" data-html="true" data-toggle="tooltip" data-placement="top" data-original-title="<p>mi2rdf zal deze <b>base URI</b> gebruiken als namespace voor de URI's van de triples.">?</span>
 		  <input class="form-control" value="<?= htmlentities($_SESSION["organisation"]["namespace"],ENT_QUOTES) ?>" id="namespace" name="namespace" required>
 		  <p><br></p>
 		  <label for="tuser">Triply (organization) user</label>
@@ -342,71 +362,35 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
 		
 		  <br><input type="submit" class="btn btn-primary" value="Opslaan">
 		  </form>
+		  
+  </div>
+  <div class="tab-pane fade" id="velden" role="tabpanel" aria-labelledby="velden-tab">
+  
+	<form action="upload-skipfields.php" method="post" enctype="multipart/form-data">
+	<p>De inhoud van het MAIS export bestand wordt zo veel mogelijk omgezet naar triples. Sommige velden zijn niet nuttig of mogen niet omgezet worden en moeten dus genegeerd worden. In onderstaand veld kunnen de te negeren velden (1 per regel) opgegeven worden.</p>
+	<p><textarea name="skipfields" style="width:100%" rows="14"><?= htmlentities(file_get_contents("/filestore/".$organisation_id."/skipfields.csv")) ?></textarea></p>
+	<input type="submit" class="btn btn-primary" value="Opslaan">
+	</form>
+
+  </div>
+  <div class="tab-pane fade" id="context" role="tabpanel" aria-labelledby="context-tab">
+  
+	<form action="upload-context.php" method="post" enctype="multipart/form-data">
+	<p>De mapping van de MAIS velden naar properties ligt vast in een JSON context. <strong>Voorzichtig hiermee!</strong></p>
+	<p><textarea name="context" style="width:100%" rows="16"><?= htmlentities(file_get_contents("/filestore/".$organisation_id."/context.json")) ?></textarea></p>
+	<input type="submit" class="btn btn-primary" value="Opslaan">
+	</form>
+	
+  </div>
+  <div class="tab-pane fade" id="kladblok" role="tabpanel" aria-labelledby="kladblok-tab">...</div>
+</div>
+		  
+		 
 		  </div>
 		</div>
 	  </div>
 	</div>
-<?php /*
-	<div class="modal fade" id="id2guidModal" tabindex="-1" role="dialog" aria-labelledby="id2guidModalTitle" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-scrollable" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="id2guidModalTitle">ID-GUID tabel</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Sluiten"><span aria-hidden="true">&times;</span></button>
-				</div>
-				<div class="modal-body" id="id2guidModalBody">
-					<form action="upload-csv.php" method="post" enctype="multipart/form-data">
-						<p>De ID-GUID tabel voor <strong><?= htmlentities($_SESSION["organisation"]["name"]) ?></strong> bevat <?=  nrID2GUIDtabel($organisation_id) ?> regels. Deze waarden wordt gebruikt bij de vertaling van ID's naar GUID's in de te genereren linked data.</p>
-						<hr>
-						<p>De tabel kan gevuld worden door het uploaden van een CSV bestand (met als extensie .csv). Het CSV bestand kan ook gecomprimeerd worden en als .zip aangeboden worden. Elke regel in het CSV bestand moet een ID en een GUID bevatten, gescheiden door een komma. Een GUID moet bestaan uit 32 tekens (0..9, A..F, geen koppeltekens). Bijvoorbeeld:</p>
-<pre>2853004,0D8F45A06E7542C7A7E563806DD83394
-5651440,210B29A49D3B81CB44A430B64F90A6DE
-5651441,A3EDC9ED4F854135885119BAEA30E93F
-6086160,AC22AA21DBAA41E38B4A50C498D91D9E
-6086161,D4D9772AD1264345BBF591A7C1BAD0CB</pre>
-						<label for="namespace">Nieuw CSV bestand</label>
-						<input class="form-control" type="file" accept=".csv,.zip" id="file" name="file" required>
-						<br><input type="submit" class="btn btn-primary" value="Uploaden">
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-*/ ?>
-	<div class="modal fade" id="contextModal" tabindex="-1" role="dialog" aria-labelledby="contextModalTitle" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-scrollable" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="contextModalTitle">JSON context</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Sluiten"><span aria-hidden="true">&times;</span></button>
-				</div>
-				<div class="modal-body" id="contextModalBody">
-					<form action="upload-context.php" method="post" enctype="multipart/form-data">
-						<p>De mapping van de MAIS velden naar properties ligt vast in een JSON context. <strong>Voorzichtig hiermee!</strong></p>
-						<p><textarea name="context" style="width:100%" rows="10"><?= htmlentities(file_get_contents("/filestore/".$organisation_id."/context.json")) ?></textarea>
-						<br><input type="submit" class="btn btn-primary" value="Opslaan">
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="skipfieldsModal" tabindex="-1" role="dialog" aria-labelledby="skipfieldsModalTitle" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-scrollable" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="skipfieldsModalTitle">Te negeren velden</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Sluiten"><span aria-hidden="true">&times;</span></button>
-				</div>
-				<div class="modal-body" id="skipfieldsModalBody">
-					<form action="upload-skipfields.php" method="post" enctype="multipart/form-data">
-						<p>De inhoud van het MAIS export bestand wordt zo veel mogelijk omgezet naar triples. Sommige velden zijn niet nuttig of mogen niet omgezet worden en moeten dus genegeerd worden. In onderstaand veld kunnen de te negeren velden (1 per regel) opgegeven worden.</p>
-						<p><textarea name="skipfields" style="width:100%" rows="10"><?= htmlentities(file_get_contents("/filestore/".$organisation_id."/skipfields.csv")) ?></textarea>
-						<br><input type="submit" class="btn btn-primary" value="Opslaan">
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+
 <?php } ?>
 	<script>
 	var triply_user='<?= htmlentities($_SESSION["organisation"]["triply_user"],ENT_QUOTES) ?>';
