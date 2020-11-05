@@ -22,7 +22,6 @@ if (!empty($_SESSION["organisation"]["triply_token"]) && !empty($_SESSION["organ
 		$kladblok=file_get_contents($file);
 	}
 }	
-	
 
 ?><!DOCTYPE html>
 <html lang="nl">
@@ -37,7 +36,10 @@ if (!empty($_SESSION["organisation"]["triply_token"]) && !empty($_SESSION["organ
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
     <link href="../assets/css/main.css?<?= $_SERVER['ASSETS_CACHEBUSTER'] ?>" rel="stylesheet" type="text/css">
-    <link href="../assets/css/baton.css?<?= $_SERVER['ASSETS_CACHEBUSTER'] ?>" rel="stylesheet" type="text/css">
+    <script src="js/ttl.js"></script>
+    <script src="js/lined-textarea.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/lined-textarea.css">
 </head>
 
 <body class="withNavbar withSink">
@@ -59,14 +61,24 @@ if (!empty($_SESSION["organisation"]["triply_token"]) && !empty($_SESSION["organ
                 <h1>MI2RDF - Triple kladblok - <?= htmlentities($_SESSION["organisation"]["name"]); ?></h1>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-			<?php if ($btriply==1) { ?>
-             <form action="upload.php" method="post"><textarea name="kladblok" style="width:100%;height:400px;font-family: courier;font-size: 0.9em;padding: 10px;"><?= htmlentities($kladblok,ENT_QUOTES) ?></textarea><br><input type="submit" class="btn btn-success" value="Opslaan (in kladblok graph in Triply)"></form>
-			<?php } else { ?>
-			<p class="bg-danger">Er is nog geen Triply instantie geconfigureerd (dit kan via de Instellingen knop).</p>
-			<?php } ?>
-            </div>
+		
+		<?php if ($btriply==1) { ?>
+		<form action="upload.php" id="kladblok" method="post">
+			<div class="form-group">
+			  <textarea class="area lined" style="height:400px" id="ta_turtle"><?= htmlentities($kladblok,ENT_QUOTES) ?></textarea>
+			</div>
+			<div class="form-group">
+			  <input type="button" id="btn_store" class="btn btn-success" value="Opslaan (in kladblok graph in Triply)"/>
+			  <input type="button" id="btn_validate" class="btn btn-success" value="Validate!"/>
+			</div>
+		  </form>
+		  <ul id="errors"></ul>
+		  <ul id="warnings"></ul>
+		  <p id="results"></p>
+		  <script src="js/app.js"></script>
+		<?php } else { ?>
+		<p class="bg-danger">Er is nog geen Triply instantie geconfigureerd (dit kan via de Instellingen knop).</p>
+		<?php } ?>
         </div>
     </div>
 <script>
