@@ -7,6 +7,11 @@ if (isset($_GET["type"]) && ($type=="ttl" || $type=="json" || $type=="src")) {
 	$type=$_GET["type"];
 }
 
+$org_id=0;
+if (isset($_GET["org"])) {
+	$org_id=intval($_GET["org"]);
+}
+
 if (isset($_GET["guid"])) {
 	$guid=preg_replace('/[^A-F0-9\-]/i','',$_GET["guid"]);
 	
@@ -17,14 +22,14 @@ if (isset($_GET["guid"])) {
 	}
 	
 	$file=$guid.".".$ext;
-	if(file_exists(UPLOAD_DIR.$file)) {
-		send_file(UPLOAD_DIR,$file,$ext);		
+	if(file_exists(UPLOAD_DIR.$org_id.'/'.$file)) {
+		send_file(UPLOAD_DIR.$org_id.'/',$file,$ext);		
 	} else {
 		if ($type=="src") {
 			$ext="xml";
 			$file=$guid.".".$ext;
-			if(file_exists(UPLOAD_DIR.$file)) {
-				send_file(UPLOAD_DIR,$file,$ext);		
+			if(file_exists(UPLOAD_DIR.$org_id.'/'.$file)) {
+				send_file(UPLOAD_DIR.$org_id.'/',$file,$ext);		
 			} else {
 				echo "ERROR: $file doesn't exist";
 			}

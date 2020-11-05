@@ -6,15 +6,20 @@ include('includes/queue.php');
 
 set_time_limit(0);
 
-if (!is_dir(UPLOAD_DIR)) {
-	mkdir(UPLOAD_DIR);
-}
 
 $organisation_id=0;
 if (isset($_SESSION["organisation_id"])) {
 	$organisation_id=$_SESSION["organisation_id"];
 }
-				
+	
+if (!is_dir(UPLOAD_DIR)) {
+	mkdir(UPLOAD_DIR);
+}
+
+if (!is_dir(UPLOAD_DIR.$organisation_id)) {
+	mkdir(UPLOAD_DIR.$organisation_id);
+}
+		
 if ($_FILES["file"]["size"]>0) {
 	
 	$uploadedfile=basename($_FILES['file']['name']);
@@ -29,17 +34,17 @@ if ($_FILES["file"]["size"]>0) {
 					$ext = strtolower(substr($list[$i],-4));
 					if ($ext==".txt" || $ext==".xml") {
 						$guid=GUID();
-						rename($tmpdir.$list[$i],UPLOAD_DIR.$guid.$ext);
+						rename($tmpdir.$list[$i],UPLOAD_DIR.$organisation_id.'/'.$guid.$ext);
 						fInsertDataset($guid,$list[$i],"uploaded",$organisation_id);
 						fAddToQueue($guid,$list[$i],$organisation_id);
-						error_log("INFO: file $list[$i] from uploaded $uploadedfile as ".UPLOAD_DIR.$guid.$ext);
+						error_log("INFO: file $list[$i] from uploaded $uploadedfile as ".UPLOAD_DIR.$organisation_id.'/'.$guid.$ext);
 					}
 				}
 				deleteDirectory($tmpdir);
 			} else if ($ext==".txt" || $ext==".xml") {
 				$guid=GUID();
-				if (move_uploaded_file($_FILES['file']['tmp_name'], UPLOAD_DIR.$guid.$ext)) {
-					error_log("INFO: file uploaded ".UPLOAD_DIR.$guid.$ext);
+				if (move_uploaded_file($_FILES['file']['tmp_name'], UPLOAD_DIR.$organisation_id.'/'.$guid.$ext)) {
+					error_log("INFO: file uploaded ".UPLOAD_DIR.$organisation_id.'/'.$guid.$ext);
 					fInsertDataset($guid,$uploadedfile,"uploaded",$organisation_id);
 					fAddToQueue($guid,$uploadedfile,$organisation_id);
 				} else {

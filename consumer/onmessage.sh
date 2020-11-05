@@ -72,10 +72,10 @@ else
 
 	cd /MFXML-to-JSONLD
 	echo "MFXML-to-JSONLD"
-	python3 mf2jsonld.py --xml /filestore/$guid.txt --adt_id $orgid --uribase "https://waterlandsarchief.nl/" --skipfields /filestore/$orgid/skipfields.csv  > /filestore/$guid.json  2> /filestore/$guid.json.err
+	python3 mf2jsonld.py --xml /filestore/$orgid/$guid.txt --adt_id $orgid --uribase "https://waterlandsarchief.nl/" --skipfields /filestore/$orgid/skipfields.csv  > /filestore/$orgid/$guid.json  2> /filestore/$orgid/$guid.json.err
 
 
-	node --max-old-space-size=8192 /usr/local/bin/jsonld normalize /filestore/$guid.json > /filestore/$guid.nq 2> /filestore/$guid.ttl.err
+	node --max-old-space-size=8192 /usr/local/bin/jsonld normalize /filestore/$orgid/$guid.json > /filestore/$orgid/$guid.nq 2> /filestore/$orgid/guid.ttl.err
 
 	rapper -i nquads \
 	  -f 'xmlns:def="https://waterlandsarchief.nl/def/"' \
@@ -85,7 +85,7 @@ else
 	  -f 'xmlns:dct="http://purl.org/dc/terms/"' \
 	  -f 'xmlns:aet="https://waterlandsarchief.nl/def/aet#"' \
 	  -f 'xmlns:rico="https://www.ica.org/standards/RiC/ontology#"' \
-	  -o turtle /filestore/$guid.nq > /filestore/$guid.ttl  2>> /filestore/$guid.ttl.err
+	  -o turtle /filestore/$orgid/$guid.nq > /filestore/$orgid/$guid.ttl  2>> /filestore/$orgid/$guid.ttl.err
 	  
 	echo "Created ttl/$BASE.ttl" \
 
@@ -93,14 +93,14 @@ else
 	#|| head "nq/$BASE.nq" # in case of error
 
 
-	if [ -e "/filestore/$guid.ttl" ]; then
+	if [ -e "/filestore/$orgid/$guid.ttl" ]; then
 		mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD -e "UPDATE datasets SET state='converted',converted=NOW() WHERE guid='$guid'"
 
 		echo "$guid converted"
 
 		if [ "" != "$TRIPLY_TOKEN" ]; then
 
-			URL="http://mi2rdf.netwerkdigitaalerfgoed.nl/download.php?guid=$guid"
+			URL="http://mi2rdf.netwerkdigitaalerfgoed.nl/download.php?guid=$guid&org=$orgid"
 
 			curl -s --request POST -H 'Content-Type: application/json' -H "Authorization: Bearer $TRIPLY_TOKEN" "$API/datasets/$TRIPLY_USER/$TRIPLY_DATASET/jobs" --data-binary '{"url":"'$URL'","type":"download"}' > $JSON
 
