@@ -160,9 +160,9 @@
 	
 				$('.downloadmodal').on('click', function(e){
 				  var guid = $(this).attr('data-guid');
-				  $('#dsrc').attr('href','download.php?guid='+guid+'&type=src');
-				  $('#djson').attr('href','download.php?guid='+guid+'&type=json');
-				  $('#dttl').attr('href','download.php?guid='+guid+'&type=ttl');
+				  $('#dsrc').attr('href','download.php?guid='+guid+'&type=src'+'&org='+organisation_id);
+				  $('#djson').attr('href','download.php?guid='+guid+'&type=json'+'&org='+organisation_id);
+				  $('#dttl').attr('href','download.php?guid='+guid+'&type=ttl'+'&org='+organisation_id);
 				  $('#downloadModal').modal('show');
 				});
 				

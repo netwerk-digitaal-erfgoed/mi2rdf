@@ -395,6 +395,7 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
 	<script>
 	var triply_user='<?= htmlentities($_SESSION["organisation"]["triply_user"],ENT_QUOTES) ?>';
 	var triply_dataset='<?= htmlentities($_SESSION["organisation"]["triply_dataset"],ENT_QUOTES) ?>';
+	var organisation_id='<?= $organisation_id ?>';
 	</script>
     <script src="./assets/js/main.js?<?= $_SERVER['ASSETS_CACHEBUSTER'] ?>"></script>
 </body>
