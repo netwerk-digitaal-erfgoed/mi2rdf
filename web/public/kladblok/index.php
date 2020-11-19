@@ -65,7 +65,7 @@ if (!empty($_SESSION["organisation"]["triply_token"]) && !empty($_SESSION["organ
 		<?php if ($btriply==1) { ?>
 		<form action="upload.php" id="kladblok" method="post">
 			<div class="form-group">
-			  <textarea class="area lined" style="height:400px" id="ta_turtle"><?= htmlentities($kladblok,ENT_QUOTES) ?></textarea>
+			  <textarea name="kladblok" class="area lined" style="height:400px" id="ta_turtle"><?= htmlentities($kladblok,ENT_QUOTES) ?></textarea>
 			</div>
 			<div class="form-group">
 			  <input type="button" id="btn_store" class="btn btn-success" value="Opslaan (in kladblok graph in Triply)"/>
