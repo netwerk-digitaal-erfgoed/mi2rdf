@@ -1,5 +1,5 @@
 <?php
- 
+
 include('includes/config.php');
 include('includes/database.php');
 
@@ -7,15 +7,21 @@ if (isset($_SESSION["organisation_id"])) {
 	if (isset($_POST["namespace"]) && isset($_POST["tuser"]) && isset($_POST["ttoken"]) && isset($_POST["tdataset"])) {
 		
 		$namespace=$_POST["namespace"];
+		$namespaceid=$_POST["namespaceid"];
+		$namespacedef=$_POST["namespacedef"];
+
 		$tuser=$_POST["tuser"];
 		$ttoken=$_POST["ttoken"];
 		$tdataset=$_POST["tdataset"];
-		
+
 		$organisation_id=$_SESSION["organisation_id"];
 
-		fUpdateOrganisation($organisation_id,$namespace,$tuser,$ttoken,$tdataset);
+		fUpdateOrganisation($organisation_id,$namespace,$namespaceid,$namespacedef,$tuser,$ttoken,$tdataset);
 		
 		$_SESSION["organisation"]["namespace"]=$namespace;
+		$_SESSION["organisation"]["namespaceid"]=$namespaceid;
+		$_SESSION["organisation"]["namespacedef"]=$namespacedef;
+		
 		$_SESSION["organisation"]["triply_user"]=$tuser;
 		$_SESSION["organisation"]["triply_token"]=$ttoken;
 		$_SESSION["organisation"]["triply_dataset"]=$tdataset;

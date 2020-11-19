@@ -15,7 +15,8 @@ TRIPLY_USER=`mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PA
 TRIPLY_DATASET=`mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD  -s -N -e "SELECT triply_dataset FROM organisations WHERE id ='$orgid'";`
 
 NAMESPACE=`mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD  -s -N -e "SELECT namespace FROM organisations WHERE id ='$orgid'";`
-# https://www.archive.io/
+NAMESPACEID=`mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD  -s -N -e "SELECT namespaceid FROM organisations WHERE id ='$orgid'";`
+NAMESPACEDEF=`mysql mi2rdf -h mi2rdf-database -u $MYSQL_USER --password=$MYSQL_PASSWORD  -s -N -e "SELECT namespacedef FROM organisations WHERE id ='$orgid'";`
 
 API="https://data.netwerkdigitaalerfgoed.nl/_api"
 
@@ -72,18 +73,17 @@ else
 
 	cd /MFXML-to-JSONLD
 	echo "MFXML-to-JSONLD"
-	python3 mf2jsonld.py --xml /filestore/$orgid/$guid.txt --adt_id $orgid --uribase "https://waterlandsarchief.nl/" --skipfields /filestore/$orgid/skipfields.csv  > /filestore/$orgid/$guid.json  2> /filestore/$orgid/$guid.json.err
-
+	python3 mf2jsonld.py --xml /filestore/$orgid/$guid.txt --adt_id $orgid --uribase $NAMESPACE --skipfields /filestore/$orgid/skipfields.csv  > /filestore/$orgid/$guid.json  2> /filestore/$orgid/$guid.json.err
 
 	node --max-old-space-size=8192 /usr/local/bin/jsonld normalize /filestore/$orgid/$guid.json > /filestore/$orgid/$guid.nq 2> /filestore/$orgid/guid.ttl.err
 
 	rapper -i nquads \
-	  -f 'xmlns:def="https://waterlandsarchief.nl/def/"' \
+	  -f 'xmlns:def="'$NAMESPACEDEF'"' \
 	  -f 'xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"' \
 	  -f 'xmlns:wd="http://www.wikidata.org/entity/"' \
-	  -f 'xmlns:id="https://waterlandsarchief.nl/id/"' \
+	  -f 'xmlns:id="'$NAMESPACEID'"' \
 	  -f 'xmlns:dct="http://purl.org/dc/terms/"' \
-	  -f 'xmlns:aet="https://waterlandsarchief.nl/def/aet#"' \
+	  -f 'xmlns:aet="'$NAMESPACEDEF'aet#"' \
 	  -f 'xmlns:rico="https://www.ica.org/standards/RiC/ontology#"' \
 	  -o turtle /filestore/$orgid/$guid.nq > /filestore/$orgid/$guid.ttl  2>> /filestore/$orgid/$guid.ttl.err
 	  

@@ -19,6 +19,8 @@ CREATE TABLE `organisations` (
   `id` INT NOT NULL,
   `name` VARCHAR(200) NOT NULL,
   `namespace` VARCHAR(255) NOT NULL,
+  `namespaceid` VARCHAR(255) NOT NULL,
+  `namespacedef` VARCHAR(255) NOT NULL,
   `triply_token` VARCHAR(255) NOT NULL,
   `triply_user` VARCHAR(30) NOT NULL,
   `triply_dataset` VARCHAR(30) NOT NULL

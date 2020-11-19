@@ -14,8 +14,8 @@ function fInsertDataset($guid,$org_name,$state="uploaded",$organisation_id) {
 	$stmt->execute();
 	$mysqli->close();
 }
-
-function fUpdateOrganisation($organisation_id,$namespace,$tuser,$ttoken,$tdataset) {
+		
+function fUpdateOrganisation($organisation_id,$namespace,$namespaceid,$namespacedef,$tuser,$ttoken,$tdataset) {
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATA);
 
 	if ($mysqli->connect_error) {
@@ -23,9 +23,9 @@ function fUpdateOrganisation($organisation_id,$namespace,$tuser,$ttoken,$tdatase
 		die("ERROR: Connection failed: " . $mysqli->connect_error);
 	} 
 
-	$sql = "UPDATE organisations SET namespace=?, triply_user=?, triply_token=?, triply_dataset=? WHERE id=?";
+	$sql = "UPDATE organisations SET namespace=?, namespaceid=?, namespacedef=?, triply_user=?, triply_token=?, triply_dataset=? WHERE id=?";
 	$stmt = $mysqli->prepare($sql);
-	$stmt->bind_param("ssssd",$namespace,$tuser,$ttoken,$tdataset,$organisation_id);
+	$stmt->bind_param("ssssssd",$namespace,$namespaceid,$namespacedef,$tuser,$ttoken,$tdataset,$organisation_id);
 	$stmt->execute();
 	$mysqli->close();
 }

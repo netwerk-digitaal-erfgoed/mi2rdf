@@ -346,9 +346,17 @@ $_SESSION["organisation"]=arrGetOrganisationInfo($organisation_id);
    <form action="instellingen.php" method="post">
 		  
 		  <p>Onderstaande instellingen zijn voor alle gebruikers die gekoppeld zijn aan <strong><?= htmlentities($_SESSION["organisation"]["name"]) ?></strong>.</p>
-		  <label for="namespace">Base URI</label>
-		   <span class="btn btn-sm btn-warning float-right" data-html="true" data-toggle="tooltip" data-placement="top" data-original-title="<p>mi2rdf zal deze <b>base URI</b> gebruiken als namespace voor de URI's van de triples.">?</span>
+		  <label for="namespace">Base URI domain</label>
+		   <span class="btn btn-sm btn-warning float-right" data-html="true" data-toggle="tooltip" data-placement="top" data-original-title="<p>mi2rdf zal deze <b>base URI</b> gebruiken als namespace voor de URI's van de triples. Voorbeeld: https://waterlandsarchief.nl/">?</span>
 		  <input class="form-control" value="<?= htmlentities($_SESSION["organisation"]["namespace"],ENT_QUOTES) ?>" id="namespace" name="namespace" required>
+		  <label for="namespaceid">Base URI identifiers</label>
+		   <span class="btn btn-sm btn-warning float-right" data-html="true" data-toggle="tooltip" data-placement="top" data-original-title="<p>mi2rdf zal deze <b>base URI</b> gebruiken als namespace voor de URI's van de triples. Voorbeeld: https://waterlandsarchief.nl/id/">?</span>
+		  <input class="form-control" value="<?= htmlentities($_SESSION["organisation"]["namespaceid"],ENT_QUOTES) ?>" id="namespaceid" name="namespaceid" required>
+		  <label for="namespacedef">Base URI definitions</label>
+		   <span class="btn btn-sm btn-warning float-right" data-html="true" data-toggle="tooltip" data-placement="top" data-original-title="<p>mi2rdf zal deze <b>base URI</b> gebruiken als namespace voor de URI's van de triples. Voorbeeld: https://waterlandsarchief.nl/def/">?</span>
+		  <input class="form-control" value="<?= htmlentities($_SESSION["organisation"]["namespacedef"],ENT_QUOTES) ?>" id="namespacedef" name="namespacedef" required>
+		  
+		  
 		  <p><br></p>
 		  <label for="tuser">Triply (organization) user</label>
 		  <span class="btn btn-sm btn-warning float-right" data-html="true" data-toggle="tooltip" data-placement="top" data-original-title="<p>mi2rdf zal de triples opslaan in Triply, in een graph binnen een specifieke dataset van je organisatie.</p><ul><li>Login op data.netwerkdigitaalerfgoed.nl (Triply via NDE);</li><li>Klik je gebruikersnaam, rechtboven, en kies <b>My account</b>;</li><li>Klik op je organisatie (onder <b>Organizations</b>);</li><li>Linksboven staat de naam van je organisatie, kopieer deze waarde en plak het hier bij de Instellingen in het veld <b>Triply (organization) user</b>.</li></ul><p>NB: je kunt ook je eigen gebruikersnaam gebruiken, maar de organisatie is netter.">?</span>
